@@ -1,0 +1,70 @@
+/* Container principal da tela inicial */
+.inicio-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-grande);
+}
+
+/* Cabeçalho */
+.inicio-cabecalho h1 {
+  font-size: 28px;
+  color: var(--cor-destaque);
+  margin-bottom: var(--espaco-pequeno);
+}
+
+.inicio-cabecalho p {
+  color: var(--cor-texto-secundario);
+}
+
+/* Formulário de Busca */
+.inicio-busca {
+  display: flex;
+  gap: var(--espaco-pequeno);
+}
+
+.inicio-busca input {
+  flex: 1; /* O input ocupa todo o espaço livre que sobrar na linha */
+  padding: var(--espaco-medio);
+  border: 1px solid #ccc;
+  border-radius: var(--raio-borda);
+  font-size: 16px;
+  color: var(--cor-texto-principal);
+}
+
+.inicio-busca button {
+  padding: 0 var(--espaco-medio);
+  background-color: var(--cor-destaque); /* Usando a cor de destaque do tokens.css */
+  color: var(--cor-fundo-cartao);
+  border: none;
+  border-radius: var(--raio-borda);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Seção de Categorias */
+.inicio-categorias h2 {
+  font-size: 18px;
+  margin-bottom: var(--espaco-medio);
+  color: var(--cor-texto-principal);
+}
+
+/* Grid de Categorias usando estritamente Flexbox */
+.categorias-grid-flex {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os botões desçam para a linha de baixo se não couberem */
+  gap: var(--espaco-pequeno);
+}
+
+.btn-categoria {
+  /* O cálculo abaixo faz caberem exatos 2 botões por linha, subtraindo o gap */
+  flex: 1 1 calc(50% - var(--espaco-pequeno));
+  padding: var(--espaco-medio);
+  background-color: var(--cor-fundo-cartao);
+  border: 1px solid #ccc;
+  border-radius: var(--raio-borda);
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--cor-texto-principal);
+  cursor: pointer;
+  text-align: center;
+}
