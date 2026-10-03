@@ -1,0 +1,31 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Configuração de fonte e tela do app */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #E5E7EB;
+  color: var(--cor-texto-principal);
+  
+  /* Regra de largura máxima: 360px */
+  max-width: 360px;
+  min-height: 100vh;
+  margin: 0 auto; /* Centraliza a tela de 360px no meio do monitor */
+  background-color: var(--cor-fundo); /* Fundo real do nosso webapp */
+  
+  /* Flexbox base para empilhar o Menu e o Conteúdo (App) */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Área de contato */
+#app {
+  flex: 1; /* Faz o conteúdo ocupar todo o espaço restante abaixo do menu */
+  display: flex;
+  flex-direction: column;
+  padding: var(--espaco-medio); /* Espaçamento interno padrão */
+}

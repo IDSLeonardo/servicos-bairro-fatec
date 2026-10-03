@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Serviços de Bairro</title>
 
-  <link rel="stylesheet" href="/src/css/style.css">
+  <link rel="stylesheet" href="./src/css/style.css">
 </head>
 
 <body>
+  <!-- O menu do webapp vai entrar aqui -->
+  <nav id="menu"></nav>
 
+  <!-- O roteador vai injetar as telas dentro dessa div -->
+  <div id="app"></div>
+
+  <!-- O type="module" é obrigatório para usar os imports de arquivo para arquivo -->
+  <script type="module" src="src/js/main.js"></script>
 </body>
 
 </html>
