@@ -1,18 +1,18 @@
 :root {
   /* Cores base */
-  --cor-fundo: #F3F4F6; /* Cinza claro para o fundo do app */
-  --cor-fundo-cartao: #FFFFFF; /* Branco para destacar os cartões */
-  --cor-texto-principal: #1F2937; /* Preto para leitura confortável */
-  --cor-texto-secundario: #6B7280; /* Cinza para textos de apoio */
-  
+  --cor-fundo: #f3f4f6; /* Cinza claro para o fundo do app */
+  --cor-fundo-cartao: #ffffff; /* Branco para destacar os cartões */
+  --cor-texto-principal: #1a202c; /* Preto para leitura confortável */
+  --cor-texto-secundario: #4a5568; /* Cinza para textos de apoio */
+
   /* Cor de destaque, apenas uma */
-  --cor-destaque: #2563EB; /* Azul vibrante para botões e links */
-  
+  --cor-destaque: #019c9c; /* Azul vibrante para botões e links */
+
   /* Espaçamentos (para usar no padding e gap do Flexbox) */
   --espaco-pequeno: 8px;
   --espaco-medio: 16px;
   --espaco-grande: 24px;
-  
+
   /* Bordas */
   --raio-borda: 8px; /* Para deixar os cantos arredondados */
 }

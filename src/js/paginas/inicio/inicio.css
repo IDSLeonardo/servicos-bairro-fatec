@@ -6,14 +6,27 @@
 }
 
 /* Cabeçalho */
+
+.inicio-cabecalho {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--espaco-pequeno);
+}
+
 .inicio-cabecalho h1 {
-  font-size: 28px;
-  color: var(--cor-destaque);
-  margin-bottom: var(--espaco-pequeno);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--espaco-pequeno);
 }
 
 .inicio-cabecalho p {
-  color: var(--cor-texto-secundario);
+    color: var(--cor-texto-secundario);
+    font-size: 16px;
+    margin-top: 12px;
 }
 
 /* Formulário de Busca */
@@ -67,4 +80,18 @@
   color: var(--cor-texto-principal);
   cursor: pointer;
   text-align: center;
+}
+
+/* Controla o tamanho exato da imagem gerada */
+.logo-imagem {
+  width: 220px; /* Largura perfeita para caber nos 360px da tela */
+  height: auto; /* Mantém a proporção correta sem esticar */
+  border-radius: 12px; /* Deixa as pontas da imagem levemente arredondadas */
+  mix-blend-mode: multiply; /* Truque de CSS: faz o fundo branco da imagem mesclar melhor com o fundo do app */
+}
+
+.inicio-cabecalho p {
+  color: var(--cor-texto-secundario);
+  font-size: 16px;
+  margin-top: 8px;
 }

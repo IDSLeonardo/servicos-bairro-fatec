@@ -8,16 +8,21 @@
 /* Configuração de fonte e tela do app */
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #E5E7EB;
+  background-color: #e5e7eb;
   color: var(--cor-texto-principal);
-  
-  /* Regra de largura máxima: 360px */
-  max-width: 360px;
-  min-height: 100vh;
-  margin: 0 auto; /* Centraliza a tela de 360px no meio do monitor */
+
+  /* Regra de layout */
+  max-width: 360px; /* Trava na largura padrão exigida pelo professor */
+  height: 100vh;
+  max-height: 740px; /* Trava na altura padrão de um celular */
+  margin: 20px auto; /* Centraliza a tela de 360px no meio do monitor */
   background-color: var(--cor-fundo); /* Fundo real do nosso webapp */
-  
-  /* Flexbox base para empilhar o Menu e o Conteúdo (App) */
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+
+  /* Flexbox base para empilhar o menu e o conteúdo (App) */
   display: flex;
   flex-direction: column;
 }
@@ -28,4 +33,42 @@ body {
   display: flex;
   flex-direction: column;
   padding: var(--espaco-medio); /* Espaçamento interno padrão */
+}
+
+/* Navbar inferior (menu) */
+#menu {
+  /* Empurra o menu para o final da tela */
+  margin-top: auto;
+  background-color: var(--cor-fundo-cartao);
+  border-top: 1px solid #ddd;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around; /* Espalha os ícones igualmente */
+  padding: var(--espaco-pequeno) 0;
+}
+
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--cor-texto-secundario);
+  gap: 4px;
+}
+
+.nav-texto {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.nav-icon {
+  font-size: 20px;
+}
+
+/* Efeito de cor ao passar o mouse ou focar no link */
+.nav-link:hover,
+.nav-link:active {
+  color: var(--cor-destaque);
 }

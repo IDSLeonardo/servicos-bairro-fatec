@@ -5,8 +5,8 @@ function inicio(app) {
   app.innerHTML = `
         <div class="inicio-conteudo">
             <header class="inicio-cabecalho">
-                <h1>Serviços do Bairro</h1>
-                <p>Encontre quem resolve perto de você.</p>
+            <img src="/src/assets/imgs/logo.png" alt="Logo Serviços do Bairro" class="logo-imagem">
+            <p>Encontre quem resolve perto de você.</p>
             </header>
 
             <form id="form-busca" class="inicio-busca">
