@@ -17,12 +17,6 @@ export const rotas = [
     pagina: (app) => (app.innerHTML = "<h1>Novo Serviço</h1>"),
   },
   {
-    url: "#favoritos",
-    label: "Favoritos",
-    icon: "<img src='./src/assets/icons/heart.svg'>",
-    pagina: (app) => (app.innerHTML = "<h1>Meus Favoritos</h1>"),
-  },
-  {
     url: "#conta",
     label: "Minha Conta",
     icon: "<img src='./src/assets/icons/user.svg'>",
