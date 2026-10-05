@@ -16,6 +16,6 @@ function resultados(app) {
 export default {
   url: "#resultados",
   label: "Resultados",
-  icon: "🔍",
+  icon: "<img src='./src/assets/icons/search.svg'>",
   pagina: resultados,
 };

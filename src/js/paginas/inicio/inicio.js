@@ -10,17 +10,17 @@ function inicio(app) {
             </header>
 
             <form id="form-busca" class="inicio-busca">
-                <input type="text" id="termo-busca" placeholder="Ex: Eletricista, Limpeza..." required>
+                <input type="text" id="termo-busca" placeholder="O que você precisa?" required>
                 <button type="submit" id="btn-busca">Buscar</button>
             </form>
 
             <section class="inicio-categorias">
                 <h2>Categorias Populares</h2>
                 <div class="categorias-grid-flex">
-                    <button type="button" class="btn-categoria" data-categoria="Elétrica">⚡ Elétrica</button>
-                    <button type="button" class="btn-categoria" data-categoria="Limpeza">🧹 Limpeza</button>
-                    <button type="button" class="btn-categoria" data-categoria="Montagem">🔧 Montagem</button>
-                    <button type="button" class="btn-categoria" data-categoria="Encanador">💧 Encanador</button>
+                    <button type="button" class="btn-categoria" data-categoria="Elétrica"> <img src='./src/assets/icons/zap.svg'> Elétrica</button>
+                    <button type="button" class="btn-categoria" data-categoria="Limpeza"> <img src='./src/assets/icons/sparkles.svg'> Limpeza</button>
+                    <button type="button" class="btn-categoria" data-categoria="Montagem"> <img src='./src/assets/icons/drill.svg'> Montagem</button>
+                    <button type="button" class="btn-categoria" data-categoria="Encanador"> <img src='./src/assets/icons/wrench.svg'> Encanador</button>
                 </div>
             </section>
         </div>
@@ -58,6 +58,6 @@ function adicionarEvento() {
 export default {
   url: "#inicio",
   label: "Início",
-  icon: "🏠",
+  icon: "<img src='./src/assets/icons/home.svg'>",
   pagina: inicio,
 };

@@ -13,13 +13,13 @@ export const rotas = [
   {
     url: "#publicar",
     label: "Publicar",
-    icon: "➕",
+    icon: "<img src='./src/assets/icons/plus.svg'>",
     pagina: (app) => (app.innerHTML = "<h1>Novo Serviço</h1>"),
   },
   {
     url: "#conta",
     label: "Minha Conta",
-    icon: "👤",
+    icon: "<img src='./src/assets/icons/user.svg'>",
     pagina: (app) => (app.innerHTML = "<h1>Minha Conta</h1>"),
   },
 ];
