@@ -1,0 +1,53 @@
+.conta-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-grande);
+  padding: var(--espaco-medio);
+}
+
+.perfil-cabecalho {
+  text-align: center;
+  padding-bottom: var(--espaco-grande);
+  border-bottom: 1px solid #eee;
+}
+
+.perfil-avatar {
+  width: 80px;
+  height: 80px;
+  background-color: var(--cor-destaque);
+  border-radius: 50%;
+  margin: 0 auto var(--espaco-pequeno);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cartao-configuracao {
+  background-color: var(--cor-fundo-cartao);
+  padding: var(--espaco-medio);
+  border-radius: var(--raio-borda);
+  border: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* O botão que altera o modo */
+.btn-toggle {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-toggle.ativo {
+  background-color: var(--cor-destaque);
+  color: white;
+}
+
+.btn-toggle.inativo {
+  background-color: #ddd;
+  color: #333;
+}

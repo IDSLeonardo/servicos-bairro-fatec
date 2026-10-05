@@ -14,13 +14,33 @@ function inicio(app) {
                 <button type="submit" id="btn-busca">Buscar</button>
             </form>
 
-            <section class="inicio-categorias">
-                <h2>Categorias Populares</h2>
+<section class="inicio-categorias">
+                <h2>O que você precisa hoje?</h2>
                 <div class="categorias-grid-flex">
-                    <button type="button" class="btn-categoria" data-categoria="Elétrica"> <img src='./src/assets/icons/zap.svg'> Elétrica</button>
-                    <button type="button" class="btn-categoria" data-categoria="Limpeza"> <img src='./src/assets/icons/sparkles.svg'> Limpeza</button>
-                    <button type="button" class="btn-categoria" data-categoria="Montagem"> <img src='./src/assets/icons/drill.svg'> Montagem</button>
-                    <button type="button" class="btn-categoria" data-categoria="Encanador"> <img src='./src/assets/icons/wrench.svg'> Encanador</button>
+                    <button type="button" class="btn-categoria" data-categoria="Elétrica"> 
+                        <img src='./src/assets/icons/zap.svg'> Elétrica
+                    </button>
+                    <button type="button" class="btn-categoria" data-categoria="Hidráulica"> 
+                        <img src='./src/assets/icons/droplet.svg'> Hidráulica
+                    </button>
+                    <button type="button" class="btn-categoria" data-categoria="Montagem"> 
+                        <img src='./src/assets/icons/drill.svg'> Montagem
+                    </button>
+                    <button type="button" class="btn-categoria" data-categoria="Reformas"> 
+                        <img src='./src/assets/icons/hard-hat.svg'> Reformas
+                    </button>
+                    <button type="button" class="btn-categoria" data-categoria="Limpeza"> 
+                        <img src='./src/assets/icons/sparkles.svg'> Limpeza
+                    </button>
+                    <button type="button" class="btn-categoria" data-categoria="Transporte"> 
+                        <img src='./src/assets/icons/truck.svg'> Transporte
+                    </button>
+                    <button type="button" class="btn-categoria" data-categoria="Beleza"> 
+                        <img src='./src/assets/icons/scissors.svg'> Beleza
+                    </button>
+                    <button type="button" class="btn-categoria" data-categoria="Diversos"> 
+                        <img src='./src/assets/icons/ellipsis.svg'> Diversos
+                    </button>
                 </div>
             </section>
         </div>
