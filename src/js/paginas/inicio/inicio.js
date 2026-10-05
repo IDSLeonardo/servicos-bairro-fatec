@@ -48,7 +48,7 @@ function adicionarEvento() {
   // Evento 2: Clicar nos botões de categoria
   listaCategoria.forEach((botao) =>
     botao.addEventListener("click", (evento) => {
-      const categoriaEscolhida = evento.target.dataset.categoria;
+      const categoriaEscolhida = evento.currentTarget.dataset.categoria;
       sessionStorage.setItem("termoBusca", categoriaEscolhida); // Guarda a palavra
       window.location.hash = "#resultados"; // Muda a tela
     }),

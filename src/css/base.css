@@ -46,7 +46,7 @@ body {
 .navbar {
   display: flex;
   justify-content: space-around; /* Espalha os ícones igualmente */
-  padding: var(--espaco-pequeno) 0;
+  padding: var(--espaco-pequeno) 0; 
 }
 
 .nav-link {
@@ -65,6 +65,12 @@ body {
 
 .nav-icon {
   font-size: 20px;
+}
+
+/* Tamanho dos ícones na barra de navegação inferior */
+.nav-icon img {
+  width: 24px;
+  height: 24px;
 }
 
 /* Efeito de cor ao passar o mouse ou focar no link */
