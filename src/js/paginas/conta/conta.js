@@ -1,14 +1,14 @@
 import './conta.css';
+import userIcon from '/src/assets/icons/user.svg';
 
 function conta(app) {
-    // Verifica se já está como profissional na memória do navegador
     const modoProfissional = localStorage.getItem('modoProfissional') === 'true';
 
     app.innerHTML = `
         <div class="conta-conteudo">
             <header class="perfil-cabecalho">
                 <div class="perfil-avatar">
-                    <img src="./src/assets/icons/user.svg" style="filter: invert(1); width: 40px;">
+                    <img src="${userIcon}" alt="Perfil" style="filter: invert(1); width: 40px;">
                 </div>
                 <h2>Usuário Convidado</h2>
                 <p>Membro do bairro</p>
@@ -20,7 +20,11 @@ function conta(app) {
                         <h3>Modo Prestador</h3>
                         <p style="font-size: 12px; color: var(--cor-texto-secundario);">Ative para publicar serviços</p>
                     </div>
-                    <button id="btn-modo-prof" class="btn-toggle ${modoProfissional ? 'ativo' : 'inativo'}">
+                    <button 
+                        id="btn-modo-prof" 
+                        class="btn-toggle ${modoProfissional ? 'ativo' : 'inativo'}"
+                        aria-pressed="${modoProfissional}"
+                    >
                         ${modoProfissional ? 'ON' : 'OFF'}
                     </button>
                 </div>
@@ -34,19 +38,24 @@ function conta(app) {
 function adicionarEventoConta() {
     const btnProfissional = document.getElementById('btn-modo-prof');
 
+    if (!btnProfissional) return;
+
     btnProfissional.addEventListener('click', () => {
-        // Lê o estado atual
         const estadoAtual = localStorage.getItem('modoProfissional') === 'true';
-        
-        // Inverte e salva o novo estado
         const novoEstado = !estadoAtual;
+
+        // Atualiza a memória do navegador
         localStorage.setItem('modoProfissional', novoEstado);
-        
-        // Atualiza a interface
+
+        // Atualiza a interface diretamente
         btnProfissional.textContent = novoEstado ? 'ON' : 'OFF';
         btnProfissional.className = `btn-toggle ${novoEstado ? 'ativo' : 'inativo'}`;
-        
-        // Dispara um recarregamento da página para atualizar o Menu Inferior (que faremos depois)
+        btnProfissional.setAttribute('aria-pressed', novoEstado);
+
+        // Notifica outros componentes da SPA (como a Navbar) sobre a alteração
+        window.dispatchEvent(new Event('mudancaModoProfissional'));
+
+        // Recarrega a página caso sua Navbar dependa do reload tradicional
         window.location.reload();
     });
 }
@@ -54,6 +63,6 @@ function adicionarEventoConta() {
 export default {
     url: "#conta",
     label: "Minha Conta",
-    icon: "<img src='./src/assets/icons/user.svg'>",
+    icon: `<img src="${userIcon}" alt="Minha Conta">`,
     pagina: conta
 };

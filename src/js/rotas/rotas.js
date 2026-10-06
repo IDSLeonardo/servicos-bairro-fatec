@@ -1,25 +1,26 @@
 import inicio from "../paginas/inicio/inicio.js";
 import resultados from "../paginas/resultados/resultados.js";
-import conta from "../paginas/conta/conta.js"; // Importa a tela real da conta
+import conta from "../paginas/conta/conta.js";
+import publicar from "../paginas/publicar/publicar.js";
+import detalhe from "../paginas/detalhe/detalhe.js"; // <--- Importe a tela real
 
-// Verifica se o modo profissional está ativo no navegador
-const modoProfissionalAtivo = localStorage.getItem('modoProfissional') === 'true';
+const eModoProfissional = () => localStorage.getItem('modoProfissional') === 'true';
 
 export const rotas = [
   inicio,
   resultados,
-  {
-    url: "#detalhe",
-    label: "",
-    icon: "",
-    pagina: (app) => (app.innerHTML = "<h1>Detalhe do Serviço</h1>"),
-  },
+  detalhe, // <--- Substitua a rota estática por detalhe
   {
     url: "#publicar",
-    // Esconde o label e o ícone se não for profissional, sumindo com ele da Navbar
-    label: modoProfissionalAtivo ? "Publicar" : "",
-    icon: modoProfissionalAtivo ? "<img src='./src/assets/icons/plus.svg'>" : "",
-    pagina: (app) => (app.innerHTML = "<h1>Novo Serviço</h1>"),
+    label: eModoProfissional() ? "Publicar" : "",
+    icon: eModoProfissional() ? "<img src='/src/assets/icons/plus.svg'>" : "",
+    pagina: (app) => {
+      if (!eModoProfissional()) {
+        window.location.hash = "#inicio";
+        return;
+      }
+      publicar.pagina(app);
+    },
   },
-  conta // Adiciona a rota real da conta
+  conta
 ];
