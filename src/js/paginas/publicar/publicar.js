@@ -1,0 +1,91 @@
+import "./publicar.css";
+
+function publicar(app) {
+    app.innerHTML = `
+        <div class="publicar-conteudo">
+            <header class="publicar-cabecalho">
+                <h2>Publicar Serviço</h2>
+                <p>Cadastre um novo serviço para os moradores do bairro</p>
+            </header>
+
+            <form id="form-publicar" class="form-publicar">
+                <div class="campo-grupo">
+                    <label for="titulo">Título do Serviço</label>
+                    <input type="text" id="titulo" placeholder="Ex: Reparo elétrico residencial" required>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" required>
+                        <option value="">Selecione uma categoria</option>
+                        <option value="Elétrica">Elétrica</option>
+                        <option value="Hidráulica">Hidráulica</option>
+                        <option value="Montagem">Montagem</option>
+                        <option value="Reformas">Reformas</option>
+                        <option value="Limpeza">Limpeza</option>
+                        <option value="Transporte">Transporte</option>
+                        <option value="Beleza">Beleza</option>
+                        <option value="Diversos">Diversos</option>
+                    </select>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="valor">Valor (R$)</label>
+                    <input type="text" id="valor" placeholder="Ex: 150,00 ou A combinar" required>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="descricao">Descrição</label>
+                    <textarea id="descricao" rows="4" placeholder="Descreva os detalhes do serviço que você oferece..." required></textarea>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="contato">Telefone / WhatsApp</label>
+                    <input type="tel" id="contato" placeholder="(11) 99999-9999" required>
+                </div>
+
+                <button type="submit" class="btn-publicar">Publicar Anúncio</button>
+            </form>
+        </div>
+    `;
+
+    adicionarEventoPublicar();
+}
+
+function adicionarEventoPublicar() {
+    const formPublicar = document.getElementById("form-publicar");
+
+    if (!formPublicar) return;
+
+    formPublicar.addEventListener("submit", (evento) => {
+        evento.preventDefault();
+
+        // Coleta os dados do formulário incluindo o novo campo 'valor'
+        const novoServico = {
+            id: Date.now(),
+            titulo: document.getElementById("titulo").value.trim(),
+            categoria: document.getElementById("categoria").value,
+            valor: document.getElementById("valor").value.trim(),
+            descricao: document.getElementById("descricao").value.trim(),
+            contato: document.getElementById("contato").value.trim(),
+            dataCriacao: new Date().toLocaleDateString("pt-BR")
+        };
+
+        // Salva no localStorage (simulando persistência de dados)
+        const servicosAtuais = JSON.parse(localStorage.getItem("servicosCadastrados") || "[]");
+        servicosAtuais.push(novoServico);
+        localStorage.setItem("servicosCadastrados", JSON.stringify(servicosAtuais));
+
+        alert("Serviço publicado com sucesso!");
+
+        // Redireciona de volta para a tela de início
+        window.location.hash = "#inicio";
+    });
+}
+
+export default {
+    url: "#publicar",
+    label: "Publicar",
+    icon: "<img src='/src/assets/icons/plus.svg' alt='Publicar'>",
+    pagina: publicar
+};
