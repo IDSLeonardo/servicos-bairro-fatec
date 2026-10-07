@@ -1,92 +1,95 @@
 .publicar-conteudo {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    width: 100%;
-    box-sizing: border-box;
+  /* Organiza a tela em coluna e permite rolagem vertical no celular. */
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--espaco-medio);
+  min-height: 0;
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  padding-bottom: var(--espaco-grande);
 }
 
 .publicar-cabecalho {
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-pequeno);
 }
 
-.publicar-cabecalho h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--cor-texto-principal, #333333);
-    margin-bottom: 0.25rem;
+.publicar-cabecalho h1 {
+  color: var(--cor-texto-principal);
+  font-size: 1.4rem;
 }
 
 .publicar-cabecalho p {
-    font-size: 0.9rem;
-    color: var(--cor-texto-secundario, #666666);
+  color: var(--cor-texto-secundario);
+  line-height: 1.5;
 }
 
 .form-publicar {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+  /* Empilha os campos com espaçamento consistente. */
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-medio);
 }
 
 .campo-grupo {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: left;
+  /* Deixa cada rótulo acima do respectivo campo. */
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-pequeno);
+  min-width: 0;
 }
 
 .campo-grupo label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--cor-texto-principal, #333333);
+  color: var(--cor-texto-principal);
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .campo-grupo input,
 .campo-grupo select,
 .campo-grupo textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--cor-borda, #cccccc);
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-family: inherit;
-    background-color: #ffffff;
-    box-sizing: border-box;
-    outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  align-self: stretch;
+  min-width: 0;
+  padding: var(--espaco-pequeno);
+  background-color: var(--cor-fundo-cartao);
+  border: 1px solid var(--cor-texto-secundario);
+  border-radius: var(--raio-borda);
+  color: var(--cor-texto-principal);
+  font: inherit;
 }
 
 .campo-grupo input:focus,
 .campo-grupo select:focus,
 .campo-grupo textarea:focus {
-    border-color: var(--cor-primaria, #009688);
-    box-shadow: 0 0 0 2px rgba(0, 150, 136, 0.2);
+  border-color: var(--cor-destaque);
+  outline: 2px solid var(--cor-destaque);
 }
 
-.campo-grupo textarea {
-    resize: vertical;
-    min-height: 100px;
+.publicar-botao {
+  /* Destaca a ação principal e também pode estilizar o link de acesso. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  padding: var(--espaco-pequeno) var(--espaco-medio);
+  background-color: var(--cor-destaque);
+  border: 1px solid var(--cor-destaque);
+  border-radius: var(--raio-borda);
+  color: var(--cor-fundo-cartao);
+  font: inherit;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
 }
 
-.btn-publicar {
-    width: 100%;
-    padding: 0.85rem;
-    background-color: var(--cor-primaria, #009688);
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    margin-top: 0.5rem;
+.publicar-aviso {
+  color: var(--cor-destaque);
+  line-height: 1.5;
 }
 
-.btn-publicar:hover {
-    background-color: var(--cor-primaria-hover, #00796b);
-}
-
-.btn-publicar:active {
-    transform: scale(0.98);
+.publicar-aviso a {
+  color: var(--cor-destaque);
+  font-weight: bold;
 }
