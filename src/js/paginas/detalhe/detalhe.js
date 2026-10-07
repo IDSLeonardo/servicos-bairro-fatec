@@ -1,126 +1,155 @@
+import { mockServicos, mockUsuarios } from "../../dadosMockados/servicos.js";
 import "./detalhe.css";
 
-function detalhe(app) {
-  // Resgata o serviço selecionado na página de resultados
-  const servicoString = sessionStorage.getItem("servicoSelecionado");
-  const servico = servicoString ? JSON.parse(servicoString) : null;
+// Junta os serviços de exemplo com os que possam estar salvos no navegador.
+function obterServicos() {
+  const servicosCadastrados = JSON.parse(
+    localStorage.getItem("servicosCadastrados") || "[]",
+  );
 
-  // Se não houver serviço selecionado na sessão, exibe mensagem de aviso com botão de retorno
-  if (!servico) {
+  return [...mockServicos, ...servicosCadastrados];
+}
+
+function detalhe(app) {
+  // Lê o ID do serviço e o termo de busca enviados como parâmetros da URL.
+  const parametros = new URLSearchParams(window.location.search);
+  const idUrl = parametros.get("id");
+  const termoBusca = parametros.get("termo");
+  // Recupera o último serviço publicado. A sessão permite levá-lo até esta tela.
+  const registroRecente = sessionStorage.getItem("servicoRecemPublicado");
+
+  if (registroRecente) {
+    const servicoRecente = JSON.parse(registroRecente);
+    // Evita inserir o mesmo serviço novamente no array de dados mockados.
+    const idRecenteExiste = mockServicos.find(
+      (servico) => String(servico.id) === String(servicoRecente.id),
+    );
+
+    if (!idRecenteExiste) {
+      mockServicos.push(servicoRecente);
+    }
+
+    if (String(servicoRecente.id) === String(idUrl)) {
+      sessionStorage.removeItem("servicoRecemPublicado");
+    }
+  }
+
+  // Se a URL não trouxe um ID, tenta usar o serviço selecionado na tela anterior.
+  const servicoSelecionadoTexto = sessionStorage.getItem("servicoSelecionado");
+  const servicoSelecionado = servicoSelecionadoTexto
+    ? JSON.parse(servicoSelecionadoTexto)
+    : null;
+  const idServico = idUrl || (servicoSelecionado ? servicoSelecionado.id : null);
+  // Procura o serviço pelo ID. O find devolve o primeiro registro correspondente,
+  // ou undefined se nenhum serviço tiver esse ID.
+  const servicoEncontrado = obterServicos().find(
+    (servico) => String(servico.id) === String(idServico),
+  );
+
+  sessionStorage.removeItem("servicoSelecionado");
+
+  if (!servicoEncontrado) {
+    // Trata o ID inválido sem acessar propriedades de um valor undefined.
     app.innerHTML = `
-      <div class="detalhe-conteudo">
+      <section class="detalhe-conteudo">
         <header class="detalhe-cabecalho">
-          <h2>Detalhes do Serviço</h2>
+          <h1>Serviço não encontrado</h1>
         </header>
-        <div class="detalhe-vazio">
-          <p>Nenhum serviço foi selecionado.</p>
-          <a href="#resultados" class="btn-voltar">Voltar para os Resultados</a>
-        </div>
-      </div>
+        <p>Não encontramos um serviço com esse identificador.</p>
+        <a class="detalhe-botao" href="#resultados" id="link-resultados">
+          Voltar para os resultados
+        </a>
+        <a class="detalhe-link-inicio" href="#inicio">Ir para o início</a>
+      </section>
     `;
+
+    prepararVolta(termoBusca);
     return;
   }
 
-  // Tratamento do número de telefone/WhatsApp (remove caracteres não numéricos)
-  const telefoneLimpo = (servico.telefone || servico.whatsapp || "")
-    .toString()
-    .replace(/\D/g, "");
-
-  // Mensagem pré-formatada para o WhatsApp
-  const mensagemWhatsApp = encodeURIComponent(
-    `Olá! Vi o seu anúncio de "${servico.titulo}" no aplicativo Serviços do Bairro e gostaria de mais informações.`
+  // O serviço guarda o ID do prestador; este find recupera os dados da pessoa.
+  const publicador = mockUsuarios.find(
+    (usuario) => String(usuario.id) === String(servicoEncontrado.prestadorId),
   );
-
-  // Link do WhatsApp (adiciona o DDI 55 do Brasil caso não possua)
+  // Converte os valores para formatos amigáveis antes de montar o HTML.
+  const distancia = Number(servicoEncontrado.distancia);
+  const distanciaFormatada = Number.isFinite(distancia)
+    ? `${(distancia / 1000).toLocaleString("pt-BR")} km`
+    : "Não informada";
+  const preco = Number(servicoEncontrado.preco);
+  const precoFormatado = Number.isFinite(preco)
+    ? preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+    : `R$ ${servicoEncontrado.preco || "A combinar"}`;
+  // Remove símbolos do telefone para criar um endereço aceito pelo WhatsApp.
+  const telefone = servicoEncontrado.telefone || servicoEncontrado.whatsapp || "";
+  const telefoneLimpo = String(telefone).replace(/\D/g, "");
   const linkWhatsApp = telefoneLimpo
-    ? `https://wa.me/${telefoneLimpo.length <= 11 ? '55' + telefoneLimpo : telefoneLimpo}?text=${mensagemWhatsApp}`
-    : "#";
+    ? `https://wa.me/${telefoneLimpo.length <= 11 ? `55${telefoneLimpo}` : telefoneLimpo}`
+    : "";
 
+  // Monta a tela com os dados encontrados e alternativas para campos ausentes.
   app.innerHTML = `
-    <div class="detalhe-conteudo">
+    <section class="detalhe-conteudo">
       <header class="detalhe-cabecalho">
-        <button id="btn-voltar-topo" class="btn-icone-voltar" title="Voltar">
-          ← Voltar
-        </button>
-        <h2>${servico.titulo}</h2>
+        <p class="detalhe-categoria">${servicoEncontrado.categoria || "Geral"}</p>
+        <h1>${servicoEncontrado.titulo}</h1>
       </header>
 
-      <main class="detalhe-card">
-        <div class="detalhe-badge-categoria">
-          ${servico.categoria || "Geral"}
-        </div>
+      <article class="detalhe-card">
+        <section class="detalhe-secao">
+          <h2>Área de atendimento</h2>
+          <p>${servicoEncontrado.bairro || servicoEncontrado.areaAtendimento || "Não informada"}</p>
+        </section>
 
-        <div class="detalhe-secao">
-          <span class="detalhe-rotulo">Preço / Valor:</span>
-          <span class="detalhe-preco">R$ ${servico.valor || servico.preco || "A combinar"}</span>
-        </div>
+        <section class="detalhe-secao">
+          <h2>Descrição</h2>
+          <p>${servicoEncontrado.descricao || "Sem descrição informada."}</p>
+        </section>
 
-        ${
-          servico.bairro
-            ? `
-          <div class="detalhe-secao">
-            <span class="detalhe-rotulo">Localização / Bairro:</span>
-            <span class="detalhe-texto">${servico.bairro}</span>
-          </div>
-        `
-            : ""
-        }
+        <section class="detalhe-secao">
+          <h2>Valor</h2>
+          <p><strong>${precoFormatado}</strong></p>
+        </section>
 
-        <div class="detalhe-secao">
-          <span class="detalhe-rotulo">Descrição do Serviço:</span>
-          <p class="detalhe-descricao">${servico.descricao || "Sem descrição informada."}</p>
-        </div>
+        <section class="detalhe-secao">
+          <h2>Distância</h2>
+          <p>${distanciaFormatada}</p>
+        </section>
 
-        ${
-          servico.nome
-            ? `
-          <div class="detalhe-secao">
-            <span class="detalhe-rotulo">Anunciado por:</span>
-            <span class="detalhe-texto">${servico.nome}</span>
-          </div>
-        `
-            : ""
-        }
+        <section class="detalhe-secao">
+          <h2>Publicado por</h2>
+          <p>${publicador ? publicador.nome : "Publicador não informado."}</p>
+        </section>
+      </article>
 
-        <div class="detalhe-acoes">
-          ${
-            telefoneLimpo
-              ? `
-            <a 
-              href="${linkWhatsApp}" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              class="btn-whatsapp"
-            >
-              Contactar via WhatsApp
-            </a>
-          `
-              : `
-            <button class="btn-whatsapp desabilitado" disabled>
-              Telefone não informado
-            </button>
-          `
-          }
-          
-          <a href="#resultados" class="btn-secundario-voltar">
-            Ver outros serviços
-          </a>
-        </div>
-      </main>
-    </div>
+      <nav class="detalhe-acoes">
+        ${linkWhatsApp
+          ? `<a class="detalhe-botao" href="${linkWhatsApp}" target="_blank" rel="noopener noreferrer">Contactar via WhatsApp</a>`
+          : ""}
+        <a class="detalhe-botao detalhe-botao-secundario" href="#resultados" id="link-resultados">
+          Voltar para os resultados
+        </a>
+      </nav>
+    </section>
   `;
 
-  // Adiciona evento ao botão de voltar no topo
-  const btnVoltarTopo = app.querySelector("#btn-voltar-topo");
-  btnVoltarTopo?.addEventListener("click", () => {
-    window.location.hash = "#resultados";
-  });
+  prepararVolta(termoBusca);
+}
+
+function prepararVolta(termoBusca) {
+  const linkResultados = document.getElementById("link-resultados");
+
+  if (termoBusca && linkResultados) {
+    // Guarda o termo para que Resultados possa restaurar a busca ao voltar.
+    linkResultados.addEventListener("click", () => {
+      sessionStorage.setItem("termoBusca", termoBusca);
+    });
+  }
 }
 
 export default {
   url: "#detalhe",
   label: "",
   icon: "",
-  exibirNaNavbar: false, // Flag de controlo
   pagina: detalhe,
 };
