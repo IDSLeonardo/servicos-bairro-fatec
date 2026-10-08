@@ -1,4 +1,5 @@
 import "./publicar.css";
+import { getUsuarioAtual } from "/src/js/sessao/sessao.js";
 
 function publicar(app) {
     app.innerHTML = `
@@ -60,7 +61,9 @@ function adicionarEventoPublicar() {
     formPublicar.addEventListener("submit", (evento) => {
         evento.preventDefault();
 
-        // 1. Coleta os dados limpos do formulário
+        // Obtém o usuário logado no momento
+        const usuarioLogado = getUsuarioAtual();
+
         const tituloDigitado = document.getElementById("titulo").value.trim();
         const categoriaDigitada = document.getElementById("categoria").value;
         const valorDigitado = document.getElementById("valor").value.trim();
@@ -69,6 +72,7 @@ function adicionarEventoPublicar() {
 
         const novoServico = {
             id: Date.now(),
+            usuarioId: usuarioLogado ? usuarioLogado.id : null, // Vincula o ID do usuário logado
             titulo: tituloDigitado,
             categoria: categoriaDigitada,
             valor: valorDigitado,
@@ -77,32 +81,28 @@ function adicionarEventoPublicar() {
             dataCriacao: new Date().toLocaleDateString("pt-BR")
         };
 
-        // 2. Busca lista atual no localStorage
         const servicosAtuais = JSON.parse(localStorage.getItem("servicosCadastrados") || "[]");
 
-        // 3. Validação com .find(): verifica se já existe um serviço com o MESMO TÍTULO (ignorando maiúsculas/minúsculas)
+        // Validação com .find() para recusar duplicados
         const servicoExistente = servicosAtuais.find(servico => {
             if (!servico || !servico.titulo) return false;
             return servico.titulo.trim().toLowerCase() === novoServico.titulo.toLowerCase();
         });
 
-        // 4. Bloqueia a inserção se for duplicado
         if (servicoExistente) {
             alert(`O serviço "${novoServico.titulo}" já está cadastrado! Escolha outro título.`);
-            return; // Interrompe a execução antes do push
+            return;
         }
 
-        // 5. Salva no localStorage caso não seja duplicado
         servicosAtuais.push(novoServico);
         localStorage.setItem("servicosCadastrados", JSON.stringify(servicosAtuais));
 
         alert("Serviço publicado com sucesso!");
-
-        // Redireciona para a tela inicial
         window.location.hash = "#inicio";
     });
 }
 
+// Exportação necessária para o rotas.js
 export default {
     url: "#publicar",
     label: "Publicar",

@@ -1,68 +1,118 @@
-import './conta.css';
-import userIcon from '/src/assets/icons/user.svg';
+import "./conta.css";
+import { entrar, sair, getUsuarioAtual } from "../../sessao/sessao.js";
+import { mockServicos } from "../../dadosMockados/servicos.js";
 
-function conta(app) {
-    const modoProfissional = localStorage.getItem('modoProfissional') === 'true';
-
-    app.innerHTML = `
-        <div class="conta-conteudo">
-            <header class="perfil-cabecalho">
-                <div class="perfil-avatar">
-                    <img src="${userIcon}" alt="Perfil" style="filter: invert(1); width: 40px;">
-                </div>
-                <h2>Usuário Convidado</h2>
-                <p>Membro do bairro</p>
-            </header>
-
-            <section class="configuracoes">
-                <div class="cartao-configuracao">
-                    <div>
-                        <h3>Modo Prestador</h3>
-                        <p style="font-size: 12px; color: var(--cor-texto-secundario);">Ative para publicar serviços</p>
-                    </div>
-                    <button 
-                        id="btn-modo-prof" 
-                        class="btn-toggle ${modoProfissional ? 'ativo' : 'inativo'}"
-                        aria-pressed="${modoProfissional}"
-                    >
-                        ${modoProfissional ? 'ON' : 'OFF'}
-                    </button>
-                </div>
-            </section>
-        </div>
-    `;
-
-    adicionarEventoConta();
+function obterTodosOsServicos() {
+  const servicosCriados = JSON.parse(localStorage.getItem("servicosCadastrados") || "[]");
+  return [...(mockServicos || []), ...servicosCriados];
 }
 
-function adicionarEventoConta() {
-    const btnProfissional = document.getElementById('btn-modo-prof');
+function conta(app) {
+  const usuarioLogado = getUsuarioAtual();
 
-    if (!btnProfissional) return;
+  // ESTADO 1: Usuário NÃO está logado -> Exibe formulário de Login
+  if (!usuarioLogado) {
+    app.innerHTML = `
+      <div class="conta-conteudo">
+        <header class="conta-cabecalho">
+          <h2>Acessar minha conta</h2>
+          <p>Faça login para gerenciar os seus serviços cadastrados</p>
+        </header>
 
-    btnProfissional.addEventListener('click', () => {
-        const estadoAtual = localStorage.getItem('modoProfissional') === 'true';
-        const novoEstado = !estadoAtual;
+        <form id="form-login" class="form-login">
+          <div class="campo-grupo">
+            <label for="login-email">E-mail</label>
+            <input type="email" id="login-email" placeholder="seuemail@exemplo.com" required>
+          </div>
 
-        // Atualiza a memória do navegador
-        localStorage.setItem('modoProfissional', novoEstado);
+          <div class="campo-grupo">
+            <label for="login-senha">Senha</label>
+            <input type="password" id="login-senha" placeholder="Sua senha" required>
+          </div>
 
-        // Atualiza a interface diretamente
-        btnProfissional.textContent = novoEstado ? 'ON' : 'OFF';
-        btnProfissional.className = `btn-toggle ${novoEstado ? 'ativo' : 'inativo'}`;
-        btnProfissional.setAttribute('aria-pressed', novoEstado);
+          <p id="mensagem-erro" class="mensagem-erro" style="display: none;"></p>
 
-        // Notifica outros componentes da SPA (como a Navbar) sobre a alteração
-        window.dispatchEvent(new Event('mudancaModoProfissional'));
+          <button type="submit" class="btn-entrar">Entrar</button>
+        </form>
+      </div>
+    `;
 
-        // Recarrega a página caso sua Navbar dependa do reload tradicional
-        window.location.reload();
+    const formLogin = app.querySelector("#form-login");
+    const msgErro = app.querySelector("#mensagem-erro");
+
+    formLogin.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = app.querySelector("#login-email").value.trim();
+      const senha = app.querySelector("#login-senha").value.trim();
+
+      const resultado = entrar(email, senha);
+
+      if (resultado.sucesso) {
+        conta(app); // Recarrega a tela já no estado logado
+      } else {
+        msgErro.textContent = resultado.mensagem || "Credenciais inválidas.";
+        msgErro.style.display = "block";
+      }
     });
+
+    return;
+  }
+
+  // ESTADO 2: Usuário ESTÁ logado -> Exibe Perfil e Serviços Publicados por ele
+  const todosServicos = obterTodosOsServicos();
+
+  // EXIGÊNCIA DO PROFESSOR: Filtra apenas os serviços do usuário logado usando .filter()
+  const meusServicos = todosServicos.filter(
+    (servico) => String(servico.usuarioId) === String(usuarioLogado.id)
+  );
+
+  app.innerHTML = `
+    <div class="conta-conteudo">
+      <header class="perfil-cabecalho">
+        <div class="usuario-info">
+          <h2>Olá, ${usuarioLogado.nome || 'Usuário'}!</h2>
+          <p>${usuarioLogado.email}</p>
+        </div>
+        <button id="btn-sair" class="btn-sair">Sair da Conta</button>
+      </header>
+
+      <section class="meus-servicos-secao">
+        <h3>Meus Serviços Publicados (${meusServicos.length})</h3>
+
+        <div id="lista-meus-servicos" class="lista-meus-servicos">
+          ${
+            meusServicos.length === 0
+              ? `<p class="sem-servicos">Você ainda não publicou nenhum serviço.</p>`
+              : meusServicos
+                  .map(
+                    (servico) => `
+                    <div class="card-meu-servico">
+                      <div class="card-info">
+                        <h4>${servico.titulo}</h4>
+                        <p><strong>Categoria:</strong> ${servico.categoria || 'Geral'}</p>
+                        <p><strong>Valor:</strong> R$ ${servico.valor || servico.preco || 'A combinar'}</p>
+                      </div>
+                    </div>
+                  `
+                  )
+                  .join("")
+          }
+        </div>
+      </section>
+    </div>
+  `;
+
+  // Evento do Botão Sair (Logout)
+  const btnSair = app.querySelector("#btn-sair");
+  btnSair?.addEventListener("click", () => {
+    sair();
+    conta(app); // Recarrega a tela voltando para o formulário de login
+  });
 }
 
 export default {
-    url: "#conta",
-    label: "Minha Conta",
-    icon: `<img src="${userIcon}" alt="Minha Conta">`,
-    pagina: conta
+  url: "#conta",
+  label: "Conta",
+  icon: "<img src='/src/assets/icons/user.svg' alt='Conta'>",
+  pagina: conta,
 };

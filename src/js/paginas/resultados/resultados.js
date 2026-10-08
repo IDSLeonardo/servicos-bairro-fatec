@@ -150,15 +150,15 @@ function resultados(app) {
       )
       .join("");
 
-    const cards = containerLista.querySelectorAll(".card-servico");
+      const cards = containerLista.querySelectorAll(".card-servico");
     cards.forEach((card, index) => {
       card.addEventListener("click", () => {
-        sessionStorage.setItem("servicoSelecionado", JSON.stringify(lista[index]));
+        // Salva APENAS o ID do serviço
+        sessionStorage.setItem("servicoIdSelecionado", lista[index].id);
         window.location.hash = "#detalhe";
-      });
-    });
-  }
-
+  });
+});
+}
   // Registra os eventos de escuta nos filtros
   inputBusca?.addEventListener("input", filtrarERenderizar);
   selectCategoria?.addEventListener("change", filtrarERenderizar);

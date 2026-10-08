@@ -1,132 +1,108 @@
+/* Container Principal da Tela de Detalhes */
 .detalhe-conteudo {
-  flex: 1; /*Preenche o espaço disponível do celular */
-  min-height: 0; /* Impede que estoure a tela para baixo */
-  width: 100%;
-  box-sizing: border-box;
-  overflow-y: auto; /* Liga a barra de rolagem */
-  padding: 1.25rem;
-  padding-bottom: 80px; /* Garante que o último botão não fica atrás da Navbar */
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 24px 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 16px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.detalhe-cabecalho {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.btn-icone-voltar {
-  background: none;
-  border: none;
-  color: var(--cor-destaque, #009688);
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0;
-}
-
-.detalhe-cabecalho h2 {
-  font-size: 1.35rem;
+/* Título do Serviço */
+.detalhe-conteudo h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
   color: #1a1a1a;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+/* Informações de Categoria e Preço */
+.detalhe-conteudo .categoria,
+.detalhe-conteudo .preco,
+.detalhe-conteudo .contato {
+  font-size: 0.95rem;
+  color: #555555;
   margin: 0;
 }
 
-.detalhe-card {
-  background-color: #ffffff;
-  border: 1px solid #e1e4e8;
-  border-radius: 12px;
-  padding: 1.25rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.detalhe-conteudo .preco strong {
+  color: #009688; /* Cor de destaque da aplicação */
+  font-size: 1.1rem;
 }
 
-.detalhe-badge-categoria {
-  align-self: flex-start;
-  background-color: #e6f4f1;
-  color: var(--cor-destaque, #009688);
-  padding: 0.35rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
+/* Caixa de Descrição */
+.detalhe-conteudo .descricao {
+  background-color: #f8f9fa;
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 4px solid #009688;
+  margin: 8px 0;
 }
 
-.detalhe-secao {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.detalhe-rotulo {
-  font-size: 0.8rem;
-  color: #777777;
+.detalhe-conteudo .descricao strong {
+  display: block;
+  color: #333333;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-.detalhe-preco {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #2e7d32;
-}
-
-.detalhe-descricao {
-  font-size: 0.95rem;
-  color: #333333;
+.detalhe-conteudo .descricao p {
+  margin: 0;
+  color: #4a4a4a;
   line-height: 1.5;
-  white-space: pre-line;
+  font-size: 0.95rem;
 }
 
-.detalhe-acoes {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 1rem;
-}
-
+/* Botão do WhatsApp (Verde) */
 .btn-whatsapp {
-  display: block;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   background-color: #25d366;
   color: #ffffff;
-  text-decoration: none;
-  padding: 0.85rem 1rem;
-  border-radius: 8px;
   font-weight: 600;
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 8px;
   font-size: 1rem;
-  box-shadow: 0 2px 4px rgba(37, 211, 102, 0.2);
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+  margin-top: 8px;
 }
 
 .btn-whatsapp:hover {
-  background-color: #20ba5a;
+  background-color: #1eb954;
 }
 
-.btn-whatsapp.desabilitado {
-  background-color: #cccccc;
-  cursor: not-allowed;
-  box-shadow: none;
+.btn-whatsapp:active {
+  transform: scale(0.98);
 }
 
-.btn-secundario-voltar {
-  display: block;
-  text-align: center;
-  background-color: transparent;
+/* Botão/Link Voltar */
+.btn-voltar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: #666666;
   text-decoration: none;
-  padding: 0.65rem 1rem;
-  border: 1px solid #d0d7de;
-  border-radius: 8px;
   font-size: 0.9rem;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 6px;
+  transition: color 0.2s, background-color 0.2s;
+  align-self: flex-start;
+  margin-top: 4px;
 }
 
-.detalhe-vazio {
-  text-align: center;
-  padding: 2rem 1rem;
-  background-color: #ffffff;
-  border-radius: 12px;
-  border: 1px dashed #cccccc;
+.btn-voltar:hover {
+  color: #009688;
+  background-color: #f0fdfa;
 }
