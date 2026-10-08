@@ -73,7 +73,10 @@ function conta(app) {
           <h2>Olá, ${usuarioLogado.nome || 'Usuário'}!</h2>
           <p>${usuarioLogado.email}</p>
         </div>
-        <button id="btn-sair" class="btn-sair">Sair da Conta</button>
+        <div class="acoes-perfil">
+          <a href="#publicar" class="btn-publicar-conta">+ Publicar Serviço</a>
+          <button id="btn-sair" class="btn-sair">Sair</button>
+        </div>
       </header>
 
       <section class="meus-servicos-secao">
