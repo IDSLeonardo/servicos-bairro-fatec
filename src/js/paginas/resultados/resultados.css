@@ -1,67 +1,64 @@
 /* Contentor Principal Fixo (bloqueia a rolagem do cabeçalho/filtros) */
 .resultados-conteudo {
-  /* Substitua 70px pela altura real da sua barra de ícones */
   height: calc(100vh - 70px); 
   width: 100%;
   box-sizing: border-box;
-  padding: 1.25rem;
+  padding: var(--espaco-medio);
   padding-bottom: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: var(--espaco-medio);
   overflow: hidden;
 }
 
 /* Cabeçalho de Resultados */
 .resultados-cabecalho h2 {
   font-size: 1.5rem;
-  margin-bottom: 0.25rem;
-  color: #1a1a1a;
+  margin-bottom: var(--espaco-pequeno);
+  color: var(--cor-texto-principal);
 }
 
 .resultados-cabecalho p {
   font-size: 0.9rem;
-  color: #666666;
+  color: var(--cor-texto-secundario);
 }
 
 /* Contentor de Filtros */
 .filtros-container {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--espaco-pequeno);
   width: 100%;
 }
 
 .filtros-container input,
-
 .filtros-container select {
   width: 100%;
-  padding: 0.8rem 1rem;
+  padding: var(--espaco-medio);
   border: 1px solid #d0d7de;
-  border-radius: 8px;
+  border-radius: var(--raio-borda);
   font-size: 0.95rem;
-  background-color: #ffffff;
-  color: #333333;
+  background-color: var(--cor-fundo-cartao);
+  color: var(--cor-texto-principal);
   box-sizing: border-box;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .filtros-container input:focus,
-
 .filtros-container select:focus {
-  border-color: var(--cor-destaque, #009688);
-  box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.15);
+  border-color: var(--cor-destaque);
+  box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.15); /* Sombra suave usando a cor de destaque*/
 }
 
 /* Lista de Resultados com Rolagem Exclusiva */
 #lista-resultados {
   flex: 1;
-  min-height: 0; /* <--- OBRIGATÓRIO: permite que o flex-item encolha e ative o scroll */
+  min-height: 0; /* permite que o flex-item encolha e ative o scroll */
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: var(--espaco-medio);
   width: 100%;
   padding-bottom: var(--padding-scroll-bottom, 80px);
   scrollbar-width: thin;
@@ -69,11 +66,11 @@
 
 /* Cartão de Serviço */
 .card-servico {
-  background-color: #ffffff;
+  background-color: var(--cor-fundo-cartao);
   border: 1px solid #e1e4e8;
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  border-radius: var(--raio-borda);
+  padding: var(--espaco-medio);
+  box-shadow: var(--sombra-padrao);
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -84,25 +81,25 @@
 
 .card-servico h3 {
   font-size: 1.05rem;
-  margin-bottom: 0.4rem;
-  color: #222222;
+  margin-bottom: var(--espaco-pequeno);
+  color: var(--cor-texto-principal);
 }
 
 .card-servico p {
   font-size: 0.875rem;
-  color: #555555;
-  margin-bottom: 0.3rem;
+  color: var(--cor-texto-secundario);
+  margin-bottom: var(--espaco-pequeno);
   line-height: 1.4;
 }
 
 /* Mensagem quando não existem serviços */
 .sem-resultados {
   text-align: center;
-  color: #666666;
+  color: var(--cor-texto-secundario);
   font-size: 0.95rem;
-  margin-top: 1rem;
-  padding: 1.5rem 1rem;
-  background-color: #ffffff;
-  border-radius: 8px;
+  margin-top: var(--espaco-medio);
+  padding: var(--espaco-grande) var(--espaco-medio);
+  background-color: var(--cor-fundo-cartao);
+  border-radius: var(--raio-borda);
   border: 1px dashed #cccccc;
 }

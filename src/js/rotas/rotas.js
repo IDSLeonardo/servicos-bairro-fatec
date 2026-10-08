@@ -2,14 +2,14 @@ import inicio from "../paginas/inicio/inicio.js";
 import resultados from "../paginas/resultados/resultados.js";
 import conta from "../paginas/conta/conta.js";
 import publicar from "../paginas/publicar/publicar.js";
-import detalhe from "../paginas/detalhe/detalhe.js"; // <--- Importe a tela real
+import detalhe from "../paginas/detalhe/detalhe.js";
 
 const eModoProfissional = () => localStorage.getItem('modoProfissional') === 'true';
 
 export const rotas = [
   inicio,
   resultados,
-  detalhe, // <--- Substitua a rota estática por detalhe
+  detalhe,
   {
     url: "#publicar",
     label: eModoProfissional() ? "Publicar" : "",
@@ -21,6 +21,12 @@ export const rotas = [
       }
       publicar.pagina(app);
     },
+  },
+{
+    url: "#favoritos",
+    label: "Favoritos",
+    icon: "<img src='./src/assets/icons/heart.svg'>",
+    pagina: (app) => (app.innerHTML = "<h1>Meus Favoritos</h1>"),
   },
   conta
 ];
