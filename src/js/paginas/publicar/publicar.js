@@ -19,7 +19,7 @@ function publicar(app) {
                     <select id="categoria" required>
                         <option value="">Selecione uma categoria</option>
                         <option value="Elétrica">Elétrica</option>
-                        <option value="Hidráulica">Hidráulica</option>
+                        <option value="Aulas">Aulas</option>
                         <option value="Montagem">Montagem</option>
                         <option value="Reformas">Reformas</option>
                         <option value="Limpeza">Limpeza</option>
@@ -60,25 +60,45 @@ function adicionarEventoPublicar() {
     formPublicar.addEventListener("submit", (evento) => {
         evento.preventDefault();
 
-        // Coleta os dados do formulário incluindo o novo campo 'valor'
+        // 1. Coleta os dados limpos do formulário
+        const tituloDigitado = document.getElementById("titulo").value.trim();
+        const categoriaDigitada = document.getElementById("categoria").value;
+        const valorDigitado = document.getElementById("valor").value.trim();
+        const descricaoDigitada = document.getElementById("descricao").value.trim();
+        const contatoDigitado = document.getElementById("contato").value.trim();
+
         const novoServico = {
             id: Date.now(),
-            titulo: document.getElementById("titulo").value.trim(),
-            categoria: document.getElementById("categoria").value,
-            valor: document.getElementById("valor").value.trim(),
-            descricao: document.getElementById("descricao").value.trim(),
-            contato: document.getElementById("contato").value.trim(),
+            titulo: tituloDigitado,
+            categoria: categoriaDigitada,
+            valor: valorDigitado,
+            descricao: descricaoDigitada,
+            contato: contatoDigitado,
             dataCriacao: new Date().toLocaleDateString("pt-BR")
         };
 
-        // Salva no localStorage (simulando persistência de dados)
+        // 2. Busca lista atual no localStorage
         const servicosAtuais = JSON.parse(localStorage.getItem("servicosCadastrados") || "[]");
+
+        // 3. Validação com .find(): verifica se já existe um serviço com o MESMO TÍTULO (ignorando maiúsculas/minúsculas)
+        const servicoExistente = servicosAtuais.find(servico => {
+            if (!servico || !servico.titulo) return false;
+            return servico.titulo.trim().toLowerCase() === novoServico.titulo.toLowerCase();
+        });
+
+        // 4. Bloqueia a inserção se for duplicado
+        if (servicoExistente) {
+            alert(`O serviço "${novoServico.titulo}" já está cadastrado! Escolha outro título.`);
+            return; // Interrompe a execução antes do push
+        }
+
+        // 5. Salva no localStorage caso não seja duplicado
         servicosAtuais.push(novoServico);
         localStorage.setItem("servicosCadastrados", JSON.stringify(servicosAtuais));
 
         alert("Serviço publicado com sucesso!");
 
-        // Redireciona de volta para a tela de início
+        // Redireciona para a tela inicial
         window.location.hash = "#inicio";
     });
 }
