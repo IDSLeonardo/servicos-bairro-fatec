@@ -1,11 +1,19 @@
 import "./detalhe.css";
 
 function detalhe(app) {
-  // Resgata o serviço selecionado na página de resultados
-  const servicoString = sessionStorage.getItem("servicoSelecionado");
-  const servico = servicoString ? JSON.parse(servicoString) : null;
+  // 1. Resgata apenas o ID do serviço selecionado na sessão
+  const servicoId = sessionStorage.getItem("servicoIdSelecionado");
 
-  // Se não houver serviço selecionado na sessão, exibe mensagem de aviso com botão de retorno
+  // 2. Obtém os serviços do localStorage (ou array vazio se ainda não houver nenhum)
+  const servicosGuardados = localStorage.getItem("servicos") || localStorage.getItem("listaServicos");
+  const listaServicos = servicosGuardados ? JSON.parse(servicosGuardados) : [];
+
+  // 3. EXIGÊNCIA DO PROFESSOR: Procura o serviço na lista utilizando o .find() pelo ID
+  const servico = listaServicos.find(
+    (item) => String(item.id) === String(servicoId)
+  );
+
+  // Se não encontrar o serviço
   if (!servico) {
     app.innerHTML = `
       <div class="detalhe-conteudo">
@@ -13,7 +21,7 @@ function detalhe(app) {
           <h2>Detalhes do Serviço</h2>
         </header>
         <div class="detalhe-vazio">
-          <p>Nenhum serviço foi selecionado.</p>
+          <p>Nenhum serviço foi encontrado para este ID.</p>
           <a href="#resultados" class="btn-voltar">Voltar para os Resultados</a>
         </div>
       </div>
@@ -21,8 +29,8 @@ function detalhe(app) {
     return;
   }
 
-  // Tratamento do número de telefone/WhatsApp (remove caracteres não numéricos)
-  const telefoneLimpo = (servico.telefone || servico.whatsapp || "")
+  // Tratamento do número de telefone/WhatsApp
+  const telefoneLimpo = (servico.telefone || servico.whatsapp || servico.contato || "")
     .toString()
     .replace(/\D/g, "");
 
@@ -31,7 +39,7 @@ function detalhe(app) {
     `Olá! Vi o seu anúncio de "${servico.titulo}" no aplicativo Serviços do Bairro e gostaria de mais informações.`
   );
 
-  // Link do WhatsApp (adiciona o DDI 55 do Brasil caso não possua)
+  // Link do WhatsApp
   const linkWhatsApp = telefoneLimpo
     ? `https://wa.me/${telefoneLimpo.length <= 11 ? '55' + telefoneLimpo : telefoneLimpo}?text=${mensagemWhatsApp}`
     : "#";
@@ -72,11 +80,11 @@ function detalhe(app) {
         </div>
 
         ${
-          servico.nome
+          servico.nome || servico.nomePrestador
             ? `
           <div class="detalhe-secao">
             <span class="detalhe-rotulo">Anunciado por:</span>
-            <span class="detalhe-texto">${servico.nome}</span>
+            <span class="detalhe-texto">${servico.nome || servico.nomePrestador}</span>
           </div>
         `
             : ""
@@ -121,6 +129,6 @@ export default {
   url: "#detalhe",
   label: "",
   icon: "",
-  exibirNaNavbar: false, // Flag de controlo
+  exibirNaNavbar: false,
   pagina: detalhe,
 };
