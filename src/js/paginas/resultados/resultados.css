@@ -1,14 +1,12 @@
 /* Contentor Principal Fixo (bloqueia a rolagem do cabeçalho/filtros) */
 .resultados-conteudo {
-  height: calc(100vh - 70px); 
-  width: 100%;
-  box-sizing: border-box;
-  padding: var(--espaco-medio);
-  padding-bottom: 0;
+  flex: 1; /* Preenche o espaço que sobra entre o topo e a Navbar */
+  min-height: 0; /* Impede que o conteúdo estoure o limite do #app */
   display: flex;
   flex-direction: column;
   gap: var(--espaco-medio);
-  overflow: hidden;
+  padding: var(--espaco-medio);
+  box-sizing: border-box;
 }
 
 /* Cabeçalho de Resultados */
@@ -53,14 +51,13 @@
 
 /* Lista de Resultados com Rolagem Exclusiva */
 #lista-resultados {
-  flex: 1;
-  min-height: 0; /* permite que o flex-item encolha e ative o scroll */
-  overflow-y: auto;
+  flex: 1; /* Preenche o espaço debaixo dos filtros */
+  min-height: 0; /* Ativa o limite que faz a barra de rolagem nascer */
+  overflow-y: auto; /* A rolagem acontece estritamente aqui dentro */
   display: flex;
   flex-direction: column;
   gap: var(--espaco-medio);
-  width: 100%;
-  padding-bottom: var(--padding-scroll-bottom, 80px);
+  padding-bottom: var(--espaco-medio); /* Espaço extra no último cartão */
   scrollbar-width: thin;
 }
 

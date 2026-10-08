@@ -33,6 +33,10 @@ body {
   display: flex;
   flex-direction: column;
   padding: var(--espaco-medio); /* Espaçamento interno padrão */
+    height: 100vh;      /* Força a ter exatamente a altura da janela */
+    height: 100dvh;     /* Otimização para celulares modernos */
+    overflow: hidden;   /* Corta tudo o que tentar vazar e bloqueia o scroll do ecrã na tela de fundo */
+    background-color: var(--cor-fundo-cartao, #ffffff); /* Garante o fundo branco contínuo */
 }
 
 /* Navbar inferior (menu) */
