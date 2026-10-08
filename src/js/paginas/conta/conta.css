@@ -80,6 +80,28 @@
   margin-bottom: 24px;
 }
 
+.acoes-perfil {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-publicar-conta {
+  background-color: #009688;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-publicar-conta:hover {
+  background-color: #00796b;
+}
+
 .btn-sair {
   background-color: #f44336;
   color: white;
