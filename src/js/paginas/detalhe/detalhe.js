@@ -7,39 +7,47 @@ function obterTodosOsServicos() {
 }
 
 function detalhe(app) {
-  // 1. Resgata o ID selecionado
+  // 1. Resgata o ID salvo pela tela de Resultados no sessionStorage
   const idSelecionado = sessionStorage.getItem("servicoIdSelecionado");
 
-  // 2. Busca a lista completa e localiza com .find()
+  // 2. Busca todos os serviços e utiliza .find() pelo ID (Critério do professor)
   const todosServicos = obterTodosOsServicos();
   const servico = todosServicos.find(s => String(s.id) === String(idSelecionado));
 
-  // 3. Caso não encontre o serviço
+  // 3. Caso o serviço não exista ou o ID esteja inválido
   if (!servico) {
     app.innerHTML = `
       <div class="detalhe-conteudo">
         <h2>Serviço não encontrado!</h2>
+        <p>Não foi possível carregar as informações deste serviço.</p>
         <a href="#resultados" class="btn-voltar">← Voltar para resultados</a>
       </div>
     `;
     return;
   }
 
-  // 4. Tratamento do telefone / WhatsApp
-  const numeroContato = servico.contato || servico.telefone || "";
+  // 4. Tratamento de compatibilidade entre mockServicos e formulário de cadastro
+  const numeroContato = servico.numeroContato || servico.contato || servico.telefone || "";
+  const valorExibicao = servico.valor || servico.preco || 'A combinar';
   const apenasNumeros = numeroContato.replace(/\D/g, "");
 
-  // Renderização da página
+  // 5. Renderização do layout
   app.innerHTML = `
     <div class="detalhe-conteudo">
       <h2>${servico.titulo}</h2>
       
-      <p class="categoria"><strong>Categoria:</strong> ${servico.categoria || 'Geral'}</p>
-      <p class="preco"><strong>Valor:</strong> R$ ${servico.valor || servico.preco || 'A combinar'}</p>
+      <p class="categoria">
+        <strong>Categoria:</strong> ${servico.categoria || 'Geral'} 
+        ${servico.bairro ? `| <strong>Bairro:</strong> ${servico.bairro}` : ''}
+      </p>
+
+      <p class="preco">
+        <strong>Valor:</strong> R$ ${valorExibicao}
+      </p>
 
       <div class="descricao">
         <strong>DESCRIÇÃO:</strong>
-        <p>${servico.descricao || 'Sem descrição cadastrada.'}</p>
+        <p>${servico.descricao || 'Sem descrição informada.'}</p>
       </div>
 
       <div class="secao-contato">
@@ -55,7 +63,7 @@ function detalhe(app) {
                 class="btn-contato btn-whatsapp"
               >
                 <img src="/src/assets/icons/zap.svg" alt="" class="icone-btn">
-                Entrar em Contato (WhatsApp)
+                Conversar no WhatsApp
               </a>
             `
             : `

@@ -39,7 +39,8 @@ export const mockServicos = [
     categoria: 'Reformas', 
     preco: 70.00, 
     bairro: 'Centro', 
-    descricao: 'Faço rejunte de piso dar cor que preferir e caso necessario faço nivelamento.'
+    descricao: 'Faço rejunte de piso dar cor que preferir e caso necessario faço nivelamento.',
+    numeroContato: '(11) 99999-9999'
   },
   {
     id: 2, 
@@ -48,7 +49,8 @@ export const mockServicos = [
     categoria: 'Reformas', 
     preco: 250.00, 
     bairro: 'Centro', 
-    descricao: 'Instalação com garantia.'
+    descricao: 'Instalação com garantia.',
+    numeroContato: '(11) 99999-9999'
   },
   {
     id: 3, 
@@ -57,16 +59,18 @@ export const mockServicos = [
     categoria: 'Hidráulica', 
     preco: 80.00, 
     bairro: 'Vila Mogilar', 
-    descricao: 'Servico para assentamento de pia.' 
-    },
-    {
+    descricao: 'Servico para assentamento de pia.',
+    numeroContato: '(11) 98989-8989' 
+  },
+  {
     id: 4,
     prestadorId: 2,
     titulo: "Limpeza de Sofá a Seco",
     categoria: "Limpeza",
     preco: 150.0,
     distancia: 1500, // Distância em km para simular o modelo do KiOferta
-    descricao: "Faço limpeza de sofá a seco e impermeabilização."
+    descricao: "Faço limpeza de sofá a seco e impermeabilização.",
+    numeroContato: '(11) 98989-8989'
   },
   {
     id: 5,
@@ -75,7 +79,8 @@ export const mockServicos = [
     categoria: "Elétrica",
     preco: 80.0,
     distancia: 3200,
-    descricao: "faço a instalação de chuveiros elétricos 220V com garantia."
+    descricao: "faço a instalação de chuveiros elétricos 220V com garantia.",
+    numeroContato: '(11) 91111-1111'
   },
   {
     id: 6,
@@ -84,6 +89,7 @@ export const mockServicos = [
     categoria: "Montagem",
     preco: 250.0,
     distancia: 800,
+    numeroContato: '(11) 91111-1111',
   },
   {
     id: 7, 
@@ -92,7 +98,8 @@ export const mockServicos = [
     categoria: 'Transporte', 
     preco: 'A combinar', 
     bairro: 'Jardim Armenia', 
-    descricao: 'Faço o transporte de carros de um local para outro com segurança e garantia.'
+    descricao: 'Faço o transporte de carros de um local para outro com segurança e garantia.',
+    numeroContato: '(11) 912345-6789'
   },
   {
     id: 8, 
@@ -101,7 +108,8 @@ export const mockServicos = [
     categoria: 'Beleza', 
     preco: 'A combinar', 
     bairro: 'Jardim Armenia', 
-    descricao: 'Faço serviços de manicure e pedicure com produtos de qualidade.' 
+    descricao: 'Faço serviços de manicure e pedicure com produtos de qualidade.',
+    numeroContato: '(11) 912345-6789'
   },
   {
     id: 9, 
@@ -110,7 +118,8 @@ export const mockServicos = [
     categoria: 'Diversos', 
     preco: 'A combinar', 
     bairro: 'Centro', 
-    descricao: 'Presto serviços de assistência técnica e informática, incluindo manutenção de computadores, notebooks e dispositivos móveis.' 
+    descricao: 'Presto serviços de assistência técnica e informática, incluindo manutenção de computadores, notebooks e dispositivos móveis.',
+    numeroContato: '(11) 97676-7676' 
   },
   {
     id: 10,
@@ -118,7 +127,8 @@ export const mockServicos = [
     titulo: "Aulas Particulares e Explicações",
     categoria: "Diversos",
     preco: 150.0,
-    descricao: 'Ofereço aulas particulares e explicações em diversas disciplinas, com métodos eficazes e personalizados.' // Distância em km para simular o modelo do KiOferta
+    descricao: 'Ofereço aulas particulares e explicações em diversas disciplinas, com métodos eficazes e personalizados.', // Distância em km para simular o modelo do KiOferta
+    numeroContato: '(11) 97676-7676'
   },
   {
     id: 11,
@@ -126,7 +136,8 @@ export const mockServicos = [
     titulo: "Serviços de Chaveiro",
     categoria: "Diversos",
     preco: 'A combinar',
-    descricao: 'Presto serviços de chaveiro, incluindo abertura de portas, troca de fechaduras e duplicação de chaves.'
+    descricao: 'Presto serviços de chaveiro, incluindo abertura de portas, troca de fechaduras e duplicação de chaves.',
+    numeroContato: '(11) 98765-4321'
   },
   {
     id: 12,
@@ -134,6 +145,7 @@ export const mockServicos = [
     titulo: "Cuidados de Animais de Estimação (Pet Care)",
     categoria: "Diversos",
     preco: 'A combinar',
-    descricao: "Ofereço cuidados de animais de estimação, incluindo banho, tosa e passeio."
+    descricao: "Ofereço cuidados de animais de estimação, incluindo banho, tosa e passeio.",
+    numeroContato: '(11) 98765-4321'
   },
 ];
