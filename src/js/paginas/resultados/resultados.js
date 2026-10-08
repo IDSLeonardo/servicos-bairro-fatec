@@ -6,6 +6,18 @@ function obterTodosOsServicos() {
   return [...(mockServicos || []), ...servicosCriados];
 }
 
+// Auxiliar para converter o valor do serviço em número para ordenação correta
+function extrairValorNumerico(servico) {
+  const val = servico.valor || servico.preco;
+  if (!val) return Number.MAX_VALUE;
+  if (typeof val === "number") return val;
+
+  // Extrai apenas números e ponto/vírgula, convertendo vírgula para ponto
+  const limpo = String(val).replace(/[^\d,.]/g, "").replace(",", ".");
+  const numero = parseFloat(limpo);
+  return isNaN(numero) ? Number.MAX_VALUE : numero;
+}
+
 function resultados(app) {
   // Resgata o termo de texto OU a categoria vinda da navegação
   const termoInicial = sessionStorage.getItem("termoBusca") || "";
@@ -37,6 +49,13 @@ function resultados(app) {
           <option value="Beleza">Beleza</option>
           <option value="Diversos">Diversos</option>
         </select>
+
+        <select id="select-ordenar">
+          <option value="alfabetica-asc">Nome (A - Z)</option>
+          <option value="alfabetica-desc">Nome (Z - A)</option>
+          <option value="preco-asc">Preço (Menor para Maior)</option>
+          <option value="preco-desc">Preço (Maior para Menor)</option>
+        </select>
       </div>
 
       <div id="lista-resultados"></div>
@@ -45,6 +64,7 @@ function resultados(app) {
 
   const inputBusca = app.querySelector("#input-busca");
   const selectCategoria = app.querySelector("#select-categoria");
+  const selectOrdenar = app.querySelector("#select-ordenar");
   const containerLista = app.querySelector("#lista-resultados");
   const termoDestaqueEl = app.querySelector("#termo-destaque");
 
@@ -58,8 +78,9 @@ function resultados(app) {
 
     const termo = (inputBusca?.value || "").toLowerCase().trim();
     const categoriaSelecionada = (selectCategoria?.value || "").toLowerCase().trim();
+    const criterioOrdenacao = selectOrdenar?.value || "alfabetica-asc";
 
-    // Atualiza o texto do cabeçalho em tempo real ao interagir com os filtros
+    // Atualiza o texto do cabeçalho em tempo real
     if (termoDestaqueEl) {
       if (inputBusca?.value.trim()) {
         termoDestaqueEl.textContent = inputBusca.value.trim();
@@ -70,6 +91,7 @@ function resultados(app) {
       }
     }
 
+    // 1. Filtragem
     const servicosFiltrados = listaDeServicos.filter((servico) => {
       const titulo = (servico.titulo || "").toLowerCase();
       const categoria = (servico.categoria || "").toLowerCase();
@@ -87,6 +109,23 @@ function resultados(app) {
       return bateTermo && bateCategoria;
     });
 
+    // 2. Ordenação (Aplica os critérios selecionados)
+    servicosFiltrados.sort((a, b) => {
+      switch (criterioOrdenacao) {
+        case "alfabetica-asc":
+          return (a.titulo || "").localeCompare(b.titulo || "", "pt-BR", { sensitivity: "base" });
+        case "alfabetica-desc":
+          return (b.titulo || "").localeCompare(a.titulo || "", "pt-BR", { sensitivity: "base" });
+        case "preco-asc":
+          return extrairValorNumerico(a) - extrairValorNumerico(b);
+        case "preco-desc":
+          return extrairValorNumerico(b) - extrairValorNumerico(a);
+        default:
+          return 0;
+      }
+    });
+
+    // 3. Renderização
     renderizarCards(servicosFiltrados);
   }
 
@@ -120,11 +159,12 @@ function resultados(app) {
     });
   }
 
-  // Registra eventos
+  // Registra os eventos de escuta nos filtros
   inputBusca?.addEventListener("input", filtrarERenderizar);
   selectCategoria?.addEventListener("change", filtrarERenderizar);
+  selectOrdenar?.addEventListener("change", filtrarERenderizar);
 
-  // Executa o primeiro filtro
+  // Executa a primeira filtragem e ordenação
   filtrarERenderizar();
 
   // Limpa os dados temporários da sessão
