@@ -1,53 +1,133 @@
 .conta-conteudo {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.conta-cabecalho h2,
+.perfil-cabecalho h2 {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+
+.conta-cabecalho p,
+.perfil-cabecalho p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Formulário de Login */
+.form-login {
+  margin-top: 24px;
   display: flex;
   flex-direction: column;
-  gap: var(--espaco-grande);
-  padding: var(--espaco-medio);
+  gap: 16px;
 }
 
-.perfil-cabecalho {
-  text-align: center;
-  padding-bottom: var(--espaco-grande);
-  border-bottom: 1px solid #eee;
-}
-
-.perfil-avatar {
-  width: 80px;
-  height: 80px;
-  background-color: var(--cor-destaque);
-  border-radius: 50%;
-  margin: 0 auto var(--espaco-pequeno);
+.campo-grupo {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.cartao-configuracao {
-  background-color: var(--cor-fundo-cartao);
-  padding: var(--espaco-medio);
-  border-radius: var(--raio-borda);
-  border: 1px solid #eee;
+.campo-grupo label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.campo-grupo input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.mensagem-erro {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.btn-entrar {
+  background-color: #009688;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-entrar:hover {
+  background-color: #00796b;
+}
+
+/* Header do Usuário Logado */
+.perfil-cabecalho {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 24px;
 }
 
-/* O botão que altera o modo */
-.btn-toggle {
-  padding: 8px 16px;
-  border-radius: 20px;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-toggle.ativo {
-  background-color: var(--cor-destaque);
+.btn-sair {
+  background-color: #f44336;
   color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.btn-toggle.inativo {
-  background-color: #ddd;
+.btn-sair:hover {
+  background-color: #d32f2f;
+}
+
+/* Lista de Meus Serviços */
+.meus-servicos-secao h3 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
   color: #333;
+}
+
+.lista-meus-servicos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-meu-servico {
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.card-meu-servico h4 {
+  margin: 0 0 6px 0;
+  font-size: 1.05rem;
+  color: #111;
+}
+
+.card-meu-servico p {
+  margin: 2px 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.sem-servicos {
+  color: #888;
+  font-style: italic;
+  font-size: 0.9rem;
 }
