@@ -1,36 +1,3 @@
-export const mockUsuarios = [
-  { id: 1, 
-    nome: 'João Silva', 
-    email: 'joao@email.com', 
-    senha: '123'
-  },
-  { id: 2, 
-    nome: 'Maria Souza', 
-    email: 'maria@email.com', 
-    senha: 'AdoroGatos456'
-  },
-  { id: 3, 
-    nome: 'Cristian Pacheco', 
-    email: 'criantianPach123@email.com', 
-    senha: '27281990'
-  },
-  { id: 4, 
-    nome: 'Vivian Inoue', 
-    email: 'ViviInoue@email.com', 
-    senha: 'DocaDocarmo2020'
-  },
-  { id: 5, 
-    nome: 'Henry Silva', 
-    email: 'HSilva@email.com', 
-    senha: 'Casa2020'
-  },
-  { id: 6, 
-    nome: 'Óscar Oliveira', 
-    email: 'Osceiva@email.com', 
-    senha: 'Bryan2022'
-  },
-];
-
 export const mockServicos = [
   {
     id: 1, 
