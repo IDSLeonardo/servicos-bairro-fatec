@@ -137,4 +137,3 @@ export const mockServicos = [
     descricao: "Ofereço cuidados de animais de estimação, incluindo banho, tosa e passeio."
   },
 ];
-Essa eh a classe servico em dadosmockados
