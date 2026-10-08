@@ -22,11 +22,5 @@ export const rotas = [
       publicar.pagina(app);
     },
   },
-{
-    url: "#favoritos",
-    label: "Favoritos",
-    icon: "<img src='./src/assets/icons/heart.svg'>",
-    pagina: (app) => (app.innerHTML = "<h1>Meus Favoritos</h1>"),
-  },
   conta
 ];
