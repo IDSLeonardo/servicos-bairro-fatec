@@ -1,23 +1,20 @@
-// src/js/navbar/navbar.js (ou no ficheiro de navegação)
+import { rotas } from "../rotas/rotas.js";
 
-function renderizarNavbar(paginas) {
-  const containerNavbar = document.querySelector("#navbar");
-  if (!containerNavbar) return;
+// Função responsável por desenhar a barra de navegação
+export function renderizarMenu() {
+  const nav = document.getElementById("menu");
 
-  // Filtra ignorando a rota de detalhe (e outras telas internas se necessário)
-  const paginasMenu = paginas.filter(pagina => pagina.url !== "#detalhe");
-
-  // Ou se preferir, exiba apenas páginas que tenham um ícone e label válidos:
-  // const paginasMenu = paginas.filter(pagina => pagina.icon && pagina.label);
-
-  containerNavbar.innerHTML = paginasMenu
+  // Regra E2: O menu é gerado a partir da lista de rotas.
+  const itensMenu = rotas
+    .filter((rota) => rota.label !== "")
     .map(
-      (pagina) => `
-        <a href="${pagina.url}" class="nav-item">
-          ${pagina.icon}
-          ${pagina.label ? `<span>${pagina.label}</span>` : ''}
-        </a>
-      `
+      (rota) =>
+        `<a href="${rota.url}" class="nav-link">
+            <span class="nav-icon">${rota.icon}</span>
+            <span class="nav-texto">${rota.label}</span>
+        </a>`,
     )
-    .join("");
+    .join(""); // Regra do professor de terminar os maps com join("")
+
+  nav.innerHTML = `<div class="navbar">${itensMenu}</div>`;
 }
