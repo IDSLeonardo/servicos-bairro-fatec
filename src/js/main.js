@@ -1,5 +1,7 @@
-// Importamos a lista de rotas que você acabou de criar
+// Importamos a lista de rotas
 import { rotas } from "./rotas/rotas.js";
+// Importamos a Tela 6 (Erro 404)
+import erro from "./erro/erro.js";
 
 // Função que renderiza o menu
 function renderizarMenu() {
@@ -28,17 +30,11 @@ function carregarPagina() {
   const rotaEncontrada = rotas.find((rota) => rota.url === hashAtual);
 
   if (rotaEncontrada) {
-    // Padrão do professor: Executa a página passando a div app
+    // Executa a página passando a div app
     rotaEncontrada.pagina(app);
   } else {
-    // Rota inexistente (Tela 6)
-    app.innerHTML = `
-            <div style="text-align: center; margin-top: var(--espaco-grande);">
-                <h1 style="color: var(--cor-texto-principal);">Ops! 404</h1>
-                <p style="color: var(--cor-texto-secundario); margin-bottom: var(--espaco-medio);">Esta página não existe.</p>
-                <a href="#inicio" style="color: var(--cor-destaque); font-weight: bold; text-decoration: none;">Voltar para o Início</a>
-            </div>
-        `;
+    // Rota inexistente: Chama a Tela 6
+    erro(app);
   }
 }
 
