@@ -16,4 +16,9 @@ function erro(app) {
     `;
 }
 
-export default erro;
+export default {
+  url: "#erro",
+  label: "", // label vazio: a tela nao aparece no menu (regra E2)
+  icon: "",
+  pagina: erro,
+};
