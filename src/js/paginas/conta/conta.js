@@ -63,7 +63,7 @@ function conta(app) {
 
   // EXIGÊNCIA DO PROFESSOR: Filtra apenas os serviços do usuário logado usando .filter()
   const meusServicos = todosServicos.filter(
-    (servico) => String(servico.usuarioId) === String(usuarioLogado.id)
+    (servico) => String(servico.prestadorId ?? servico.usuarioId) === String(usuarioLogado.id)
   );
 
   app.innerHTML = `
