@@ -60,9 +60,8 @@ function adicionarEvento() {
     evento.preventDefault(); // Evita o recarregamento da página (F5)
     const termo = inputBusca.value.trim();
     if (termo) {
-      sessionStorage.setItem("termoBusca", termo); // Guarda a palavra de busca
-      sessionStorage.removeItem("categoriaBusca"); // Limpa qualquer filtro de categoria anterior
-      window.location.hash = "#resultados"; // Muda para a tela de resultados
+      // A busca vai pela URL, para sobreviver ao F5
+      window.location.hash = `#resultados?busca=${encodeURIComponent(termo)}`;
     }
   });
 
@@ -70,9 +69,8 @@ function adicionarEvento() {
   listaCategoria.forEach((botao) =>
     botao.addEventListener("click", (evento) => {
       const categoriaEscolhida = evento.currentTarget.dataset.categoria;
-      sessionStorage.setItem("categoriaBusca", categoriaEscolhida); // Guarda a categoria para o select
-      sessionStorage.removeItem("termoBusca"); // Limpa a busca por texto
-      window.location.hash = "#resultados"; // Muda para a tela de resultados
+      // A categoria vai pela URL, para sobreviver ao F5
+      window.location.hash = `#resultados?categoria=${encodeURIComponent(categoriaEscolhida)}`;
     })
   );
 }

@@ -19,9 +19,10 @@ function extrairValorNumerico(servico) {
 }
 
 function resultados(app) {
-  // Resgata o termo de texto OU a categoria vinda da navegação
-  const termoInicial = sessionStorage.getItem("termoBusca") || "";
-  const categoriaInicial = sessionStorage.getItem("categoriaBusca") || "";
+  // Resgata o termo de texto OU a categoria vindos da URL (sobrevivem ao F5)
+  const parametros = new URLSearchParams(window.location.hash.split("?")[1] || "");
+  const termoInicial = parametros.get("busca") || "";
+  const categoriaInicial = parametros.get("categoria") || "";
 
   // Define o texto do cabeçalho
   const textoDestaque = termoInicial || categoriaInicial || "Todos os serviços";
@@ -79,6 +80,13 @@ function resultados(app) {
     const termo = (inputBusca?.value || "").toLowerCase().trim();
     const categoriaSelecionada = (selectCategoria?.value || "").toLowerCase().trim();
     const criterioOrdenacao = selectOrdenar?.value || "alfabetica-asc";
+
+    // Mantém a URL sincronizada com os filtros, sem recarregar (F5 preserva a busca atual)
+    history.replaceState(
+      null,
+      "",
+      `#resultados?busca=${encodeURIComponent(inputBusca?.value || "")}&categoria=${encodeURIComponent(selectCategoria?.value || "")}`
+    );
 
     // Atualiza o texto do cabeçalho em tempo real
     if (termoDestaqueEl) {
@@ -153,10 +161,9 @@ function resultados(app) {
       const cards = containerLista.querySelectorAll(".card-servico");
     cards.forEach((card, index) => {
       card.addEventListener("click", () => {
-        // Salva APENAS o ID do serviço
-        sessionStorage.setItem("servicoIdSelecionado", lista[index].id);
-        window.location.hash = "#detalhe";
-  });
+        // O id vai pela URL, para o detalhe abrir por link direto
+        window.location.hash = `#detalhe/${lista[index].id}`;
+      });
 });
 }
   // Registra os eventos de escuta nos filtros
@@ -166,10 +173,6 @@ function resultados(app) {
 
   // Executa a primeira filtragem e ordenação
   filtrarERenderizar();
-
-  // Limpa os dados temporários da sessão
-  sessionStorage.removeItem("termoBusca");
-  sessionStorage.removeItem("categoriaBusca");
 }
 
 export default {

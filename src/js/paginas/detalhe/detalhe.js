@@ -7,8 +7,8 @@ function obterTodosOsServicos() {
 }
 
 function detalhe(app) {
-  // 1. Resgata o ID salvo pela tela de Resultados no sessionStorage
-  const idSelecionado = sessionStorage.getItem("servicoIdSelecionado");
+  // 1. Resgata o ID pela URL (ex.: #detalhe/5), permitindo abrir o detalhe por link
+  const idSelecionado = window.location.hash.split("/")[1];
 
   // 2. Busca todos os serviços e utiliza .find() pelo ID (Critério do professor)
   const todosServicos = obterTodosOsServicos();

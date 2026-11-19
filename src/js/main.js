@@ -5,7 +5,8 @@ import erro from "./paginas/erro/erro.js";
 function carregarPagina() {
   const app = document.getElementById("app");
   const hashAtual = window.location.hash || "#inicio";
-  const rotaEncontrada = rotas.find((rota) => rota.url === hashAtual);
+  const base = hashAtual.split(/[/?]/)[0]; // "#detalhe/5" vira "#detalhe"
+  const rotaEncontrada = rotas.find((rota) => rota.url === base);
 
   if (rotaEncontrada) {
     rotaEncontrada.pagina(app);
