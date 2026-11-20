@@ -38,7 +38,7 @@
 .inicio-busca input {
   flex: 1; /* O input ocupa todo o espaço livre que sobrar na linha */
   padding: var(--espaco-medio);
-  border: 1px solid #ccc;
+  border: 1px solid var(--cor-borda);
   border-radius: var(--raio-borda);
   font-size: 16px;
   color: var(--cor-texto-principal);
@@ -79,7 +79,7 @@
   gap: 8px; /* Espaço entre o ícone e o texto */
   padding: var(--espaco-medio);
   background-color: var(--cor-fundo-cartao);
-  border: 1px solid #ccc;
+  border: 1px solid var(--cor-borda);
   border-radius: var(--raio-borda);
   font-size: 14px;
   font-weight: bold;
@@ -97,7 +97,7 @@
 .logo-imagem {
   width: 220px; /* Largura perfeita para caber nos 360px da tela */
   height: auto; /* Mantém a proporção correta sem esticar */
-  border-radius: 12px; /* Deixa as pontas da imagem levemente arredondadas */
+  border-radius: var(--raio-grande); /* Deixa as pontas da imagem levemente arredondadas */
   mix-blend-mode: multiply; /* Truque de CSS: faz o fundo branco da imagem mesclar melhor com o fundo do app */
 }
 

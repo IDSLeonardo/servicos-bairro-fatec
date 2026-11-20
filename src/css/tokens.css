@@ -2,11 +2,29 @@
   /* Cores base */
   --cor-fundo: #f3f4f6; /* Cinza claro para o fundo do app */
   --cor-fundo-cartao: #ffffff; /* Branco para destacar os cartões */
+  --cor-fundo-secundario: #f8f9fa; /* Cinza bem claro para blocos secundários */
   --cor-texto-principal: #1a202c; /* Preto para leitura confortável */
   --cor-texto-secundario: #4a5568; /* Cinza para textos de apoio */
+  --cor-texto-suave: #888888; /* Cinza para textos desabilitados */
+  --cor-borda: #d0d7de; /* Cor padrão das bordas */
 
-  /* Cor de destaque, apenas uma */
+  /* Cor de destaque, apenas uma por tela */
   --cor-destaque: #019c9c; /* Azul vibrante para botões e links */
+  --cor-destaque-hover: #00796b; /* Versão escura do destaque para hover */
+
+  /* Cores de erro (mensagem de login inválido) */
+  --cor-erro: #d32f2f;
+  --cor-erro-fundo: #ffebee;
+
+  /* Botão de contato WhatsApp (tela de detalhe) */
+  --cor-whatsapp-fundo: #e8f8ef;
+  --cor-whatsapp-fundo-hover: #d4f3e2;
+  --cor-whatsapp-texto: #0f9d58;
+
+  /* Sombras */
+  --sombra-padrao: 0 2px 8px rgba(0, 0, 0, 0.08); /* Cartões */
+  --sombra-app: 0 10px 30px rgba(0, 0, 0, 0.2); /* Moldura do app no body */
+  --sombra-foco: 0 0 0 3px rgba(1, 156, 156, 0.15); /* Foco dos campos de formulário */
 
   /* Espaçamentos (para usar no padding e gap do Flexbox) */
   --espaco-pequeno: 8px;
@@ -14,5 +32,6 @@
   --espaco-grande: 24px;
 
   /* Bordas */
-  --raio-borda: 8px; /* Para deixar os cantos arredondados */
+  --raio-borda: 8px; /* Cantos arredondados padrão */
+  --raio-grande: 12px; /* Cantos maiores (app no body e logo) */
 }

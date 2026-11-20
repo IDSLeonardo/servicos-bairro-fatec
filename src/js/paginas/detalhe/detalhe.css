@@ -3,9 +3,9 @@
   max-width: 500px;
   margin: 0 auto;
   padding: 24px 20px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background-color: var(--cor-fundo-cartao);
+  border-radius: var(--raio-grande);
+  box-shadow: var(--sombra-padrao);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -17,7 +17,7 @@
 .detalhe-conteudo h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--cor-texto-principal);
   margin: 0 0 8px 0;
   line-height: 1.2;
 }
@@ -27,27 +27,27 @@
 .detalhe-conteudo .preco,
 .detalhe-conteudo .contato {
   font-size: 0.95rem;
-  color: #555555;
+  color: var(--cor-texto-secundario);
   margin: 0;
 }
 
 .detalhe-conteudo .preco strong {
-  color: #009688; /* Cor de destaque da aplicação */
+  color: var(--cor-destaque); /* Cor de destaque da aplicação */
   font-size: 1.1rem;
 }
 
 /* Caixa de Descrição */
 .detalhe-conteudo .descricao {
-  background-color: #f8f9fa;
+  background-color: var(--cor-fundo-secundario);
   padding: 16px;
-  border-radius: 8px;
-  border-left: 4px solid #009688;
+  border-radius: var(--raio-borda);
+  border-left: 4px solid var(--cor-destaque);
   margin: 8px 0;
 }
 
 .detalhe-conteudo .descricao strong {
   display: block;
-  color: #333333;
+  color: var(--cor-texto-principal);
   margin-bottom: 6px;
   font-size: 0.9rem;
   text-transform: uppercase;
@@ -56,7 +56,7 @@
 
 .detalhe-conteudo .descricao p {
   margin: 0;
-  color: #4a4a4a;
+  color: var(--cor-texto-secundario);
   line-height: 1.5;
   font-size: 0.95rem;
 }
@@ -77,7 +77,7 @@
   gap: 8px;
   width: 100%;
   padding: 12px 16px;
-  border-radius: 8px;
+  border-radius: var(--raio-borda);
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
@@ -89,12 +89,12 @@
 
 /* Botão WhatsApp Minimalista (Fundo Suave) */
 .btn-whatsapp {
-  background-color: #e8f8ef;
-  color: #0f9d58;
+  background-color: var(--cor-whatsapp-fundo);
+  color: var(--cor-whatsapp-texto);
 }
 
 .btn-whatsapp:hover {
-  background-color: #d4f3e2;
+  background-color: var(--cor-whatsapp-fundo-hover);
 }
 
 .btn-whatsapp:active {
@@ -103,8 +103,8 @@
 
 /* Estado Desabilitado quando não há número */
 .btn-desabilitado {
-  background-color: #f0f0f0;
-  color: #888888;
+  background-color: var(--cor-fundo-secundario);
+  color: var(--cor-texto-suave);
   cursor: not-allowed;
 }
 
@@ -120,7 +120,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #666666;
+  color: var(--cor-texto-secundario);
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
@@ -132,5 +132,5 @@
 }
 
 .btn-voltar:hover {
-  color: #009688;
+  color: var(--cor-destaque);
 }

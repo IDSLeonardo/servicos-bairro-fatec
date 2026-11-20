@@ -8,7 +8,6 @@
 /* Configuração de fonte e tela do app */
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #e5e7eb;
   color: var(--cor-texto-principal);
 
   /* Regra de layout */
@@ -18,8 +17,8 @@ body {
   margin: 20px auto; /* Centraliza a tela de 360px no meio do monitor */
   background-color: var(--cor-fundo); /* Fundo real do nosso webapp */
 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
+  box-shadow: var(--sombra-app);
+  border-radius: var(--raio-grande);
   overflow: hidden;
 
   /* Flexbox base para empilhar o menu e o conteúdo (App) */
@@ -36,7 +35,7 @@ body {
     height: 100vh;      /* Força a ter exatamente a altura da janela */
     height: 100dvh;     /* Otimização para celulares modernos */
     overflow: hidden;   /* Corta tudo o que tentar vazar e bloqueia o scroll do ecrã na tela de fundo */
-    background-color: var(--cor-fundo-cartao, #ffffff); /* Garante o fundo branco contínuo */
+    background-color: var(--cor-fundo-cartao); /* Garante o fundo branco contínuo */
 }
 
 /* Navbar inferior (menu) */
@@ -44,7 +43,7 @@ body {
   /* Empurra o menu para o final da tela */
   margin-top: auto;
   background-color: var(--cor-fundo-cartao);
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--cor-borda);
 }
 
 .navbar {
