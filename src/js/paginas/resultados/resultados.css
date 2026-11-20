@@ -33,7 +33,7 @@
 .filtros-container select {
   width: 100%;
   padding: var(--espaco-medio);
-  border: 1px solid #d0d7de;
+  border: 1px solid var(--cor-borda);
   border-radius: var(--raio-borda);
   font-size: 0.95rem;
   background-color: var(--cor-fundo-cartao);
@@ -46,7 +46,7 @@
 .filtros-container input:focus,
 .filtros-container select:focus {
   border-color: var(--cor-destaque);
-  box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.15); /* Sombra suave usando a cor de destaque*/
+  box-shadow: var(--sombra-foco);
 }
 
 /* Lista de Resultados com Rolagem Exclusiva */
@@ -64,7 +64,7 @@
 /* Cartão de Serviço */
 .card-servico {
   background-color: var(--cor-fundo-cartao);
-  border: 1px solid #e1e4e8;
+  border: 1px solid var(--cor-borda);
   border-radius: var(--raio-borda);
   padding: var(--espaco-medio);
   box-shadow: var(--sombra-padrao);
@@ -98,5 +98,10 @@
   padding: var(--espaco-grande) var(--espaco-medio);
   background-color: var(--cor-fundo-cartao);
   border-radius: var(--raio-borda);
-  border: 1px dashed #cccccc;
+  border: 1px dashed var(--cor-borda);
+}
+
+/* Termo de busca destacado no cabeçalho */
+#termo-destaque {
+  color: var(--cor-destaque);
 }

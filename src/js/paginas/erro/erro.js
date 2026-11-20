@@ -4,7 +4,7 @@ function erro(app) {
     app.innerHTML = `
         <div class="erro-conteudo">
             <div class="erro-ilustracao">
-                <img src="./src/assets/icons/map-pin-off.svg" alt="Local não encontrado" style="width: 48px; height: 48px;">
+                <img src="./src/assets/icons/map-pin-off.svg" alt="Local não encontrado">
             </div>
             <h2 class="erro-titulo">Página não encontrada</h2>
             <p class="erro-mensagem">Ops! Parece que você tentou acessar um serviço ou endereço que não existe no bairro.</p>

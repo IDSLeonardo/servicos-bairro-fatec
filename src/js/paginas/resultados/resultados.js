@@ -30,7 +30,7 @@ function resultados(app) {
   app.innerHTML = `
     <div class="resultados-conteudo">
       <h2>Resultados</h2>
-      <p>A procurar por: <strong id="termo-destaque" style="color: var(--cor-destaque, #009688);">${textoDestaque}</strong></p>
+      <p>A procurar por: <strong id="termo-destaque">${textoDestaque}</strong></p>
 
       <div class="filtros-container">
         <input 

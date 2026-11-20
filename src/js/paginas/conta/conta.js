@@ -30,7 +30,7 @@ function conta(app) {
             <input type="password" id="login-senha" placeholder="Sua senha" required>
           </div>
 
-          <p id="mensagem-erro" class="mensagem-erro" style="display: none;"></p>
+          <p id="mensagem-erro" class="mensagem-erro"></p>
 
           <button type="submit" class="btn-entrar">Entrar</button>
         </form>
@@ -51,7 +51,7 @@ function conta(app) {
         conta(app); // Recarrega a tela já no estado logado
       } else {
         msgErro.textContent = resultado.mensagem || "Credenciais inválidas.";
-        msgErro.style.display = "block";
+        msgErro.classList.add("visivel");
       }
     });
 

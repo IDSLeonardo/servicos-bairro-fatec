@@ -18,13 +18,13 @@
 .publicar-cabecalho h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--cor-texto-principal, #333333);
+  color: var(--cor-texto-principal);
   margin-bottom: 0.25rem;
 }
 
 .publicar-cabecalho p {
   font-size: 0.9rem;
-  color: var(--cor-texto-secundario, #666666);
+  color: var(--cor-texto-secundario);
 }
 
 .form-publicar {
@@ -43,7 +43,7 @@
 .campo-grupo label {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--cor-texto-principal, #333333);
+  color: var(--cor-texto-principal);
 }
 
 .campo-grupo input,
@@ -51,11 +51,12 @@
 .campo-grupo textarea {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid var(--cor-borda, #cccccc);
-  border-radius: 8px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-borda);
   font-size: 0.95rem;
   font-family: inherit;
-  background-color: #ffffff;
+  background-color: var(--cor-fundo-cartao);
+  color: var(--cor-texto-principal);
   box-sizing: border-box;
   outline: none;
   transition:
@@ -66,8 +67,8 @@
 .campo-grupo input:focus,
 .campo-grupo select:focus,
 .campo-grupo textarea:focus {
-  border-color: var(--cor-primaria, #009688);
-  box-shadow: 0 0 0 2px rgba(0, 150, 136, 0.2);
+  border-color: var(--cor-destaque);
+  box-shadow: var(--sombra-foco);
 }
 
 .campo-grupo textarea {
@@ -78,10 +79,10 @@
 .btn-publicar {
   width: 100%;
   padding: 0.85rem;
-  background-color: var(--cor-primaria, #009688);
-  color: #ffffff;
+  background-color: var(--cor-destaque);
+  color: var(--cor-fundo-cartao);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--raio-borda);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -92,9 +93,29 @@
 }
 
 .btn-publicar:hover {
-  background-color: var(--cor-primaria-hover, #00796b);
+  background-color: var(--cor-destaque-hover);
 }
 
 .btn-publicar:active {
   transform: scale(0.98);
+}
+
+/* Tela de bloqueio (usuário não logado) */
+.bloqueio-container {
+  text-align: center;
+  margin-top: 32px;
+  padding: 20px;
+}
+
+.bloqueio-texto {
+  font-size: 1.05rem;
+  color: var(--cor-texto-secundario);
+  margin-bottom: 20px;
+}
+
+.bloqueio-link {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px 24px;
+  width: auto;
 }

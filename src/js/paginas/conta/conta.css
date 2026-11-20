@@ -8,13 +8,13 @@
 .conta-cabecalho h2,
 .perfil-cabecalho h2 {
   font-size: 1.5rem;
-  color: #1a1a1a;
+  color: var(--cor-texto-principal);
   margin-bottom: 4px;
 }
 
 .conta-cabecalho p,
 .perfil-cabecalho p {
-  color: #666;
+  color: var(--cor-texto-secundario);
   font-size: 0.9rem;
 }
 
@@ -35,31 +35,36 @@
 .campo-grupo label {
   font-weight: 600;
   font-size: 0.9rem;
-  color: #333;
+  color: var(--cor-texto-principal);
 }
 
 .campo-grupo input {
   padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-borda);
   font-size: 1rem;
 }
 
 .mensagem-erro {
-  color: #d32f2f;
-  background-color: #ffebee;
+  display: none;
+  color: var(--cor-erro);
+  background-color: var(--cor-erro-fundo);
   padding: 10px;
   border-radius: 6px;
   font-size: 0.85rem;
   margin: 0;
 }
 
+.mensagem-erro.visivel {
+  display: block;
+}
+
 .btn-entrar {
-  background-color: #009688;
-  color: white;
+  background-color: var(--cor-destaque);
+  color: var(--cor-fundo-cartao);
   border: none;
   padding: 14px;
-  border-radius: 8px;
+  border-radius: var(--raio-borda);
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
@@ -67,7 +72,7 @@
 }
 
 .btn-entrar:hover {
-  background-color: #00796b;
+  background-color: var(--cor-destaque-hover);
 }
 
 /* Header do Usuário Logado */
@@ -76,7 +81,7 @@
   justify-content: space-between;
   align-items: center;
   padding-bottom: 16px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--cor-borda);
   margin-bottom: 24px;
 }
 
@@ -86,9 +91,10 @@
   gap: 8px;
 }
 
+/* Único botão de destaque da tela (regra L3) */
 .btn-publicar-conta {
-  background-color: #009688;
-  color: #ffffff;
+  background-color: var(--cor-destaque);
+  color: var(--cor-fundo-cartao);
   padding: 8px 12px;
   border-radius: 6px;
   font-size: 0.85rem;
@@ -99,28 +105,31 @@
 }
 
 .btn-publicar-conta:hover {
-  background-color: #00796b;
+  background-color: var(--cor-destaque-hover);
 }
 
+/* Botão sair neutro: não compete com a cor de destaque da tela */
 .btn-sair {
-  background-color: #f44336;
-  color: white;
-  border: none;
+  background-color: transparent;
+  color: var(--cor-texto-secundario);
+  border: 1px solid var(--cor-borda);
   padding: 8px 16px;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .btn-sair:hover {
-  background-color: #d32f2f;
+  background-color: var(--cor-fundo-secundario);
+  color: var(--cor-texto-principal);
 }
 
 /* Lista de Meus Serviços */
 .meus-servicos-secao h3 {
   font-size: 1.1rem;
   margin-bottom: 16px;
-  color: #333;
+  color: var(--cor-texto-principal);
 }
 
 .lista-meus-servicos {
@@ -130,26 +139,26 @@
 }
 
 .card-meu-servico {
-  background: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  background-color: var(--cor-fundo-secundario);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-borda);
   padding: 14px;
 }
 
 .card-meu-servico h4 {
   margin: 0 0 6px 0;
   font-size: 1.05rem;
-  color: #111;
+  color: var(--cor-texto-principal);
 }
 
 .card-meu-servico p {
   margin: 2px 0;
   font-size: 0.85rem;
-  color: #555;
+  color: var(--cor-texto-secundario);
 }
 
 .sem-servicos {
-  color: #888;
+  color: var(--cor-texto-suave);
   font-style: italic;
   font-size: 0.9rem;
 }

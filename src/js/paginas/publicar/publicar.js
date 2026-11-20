@@ -13,11 +13,11 @@ function publicar(app) {
           <p>Acesso Restrito</p>
         </header>
 
-        <div class="bloqueio-container" style="text-align: center; margin-top: 32px; padding: 20px;">
-          <p style="font-size: 1.05rem; color: #555; margin-bottom: 20px;">
+        <div class="bloqueio-container">
+          <p class="bloqueio-texto">
             Você precisa estar logado para cadastrar e publicar um novo serviço.
           </p>
-          <a href="#conta" class="btn-publicar" style="display: inline-block; text-decoration: none; padding: 12px 24px; width: auto;">
+          <a href="#conta" class="btn-publicar bloqueio-link">
             Fazer Login / Criar Conta
           </a>
         </div>
